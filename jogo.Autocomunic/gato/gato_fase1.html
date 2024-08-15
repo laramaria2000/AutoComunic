@@ -414,7 +414,21 @@
     let proximaLetra = 0;
 
     falou_reiniciar = false;
-  
+    
+    const resetarGato = () => {
+      gato.src = 'img/gato.gif';
+      gato.style.width = '150px';
+      gato.style.bottom = '0';
+      gato.style.marginLeft = '0';
+    };
+
+    const resetarBanco = () => {
+      pipe.classList.remove('pipe-animation');
+      pipe.offsetWidth; // Trigger reflow
+      pipe.classList.add('pipe-animation');
+      pipe.style.right = '-80px';
+    };
+
     const startGame = () => {
       falou_reiniciar = false;
       pipe.classList.add('pipe-animation');
@@ -434,17 +448,9 @@
       falou_reiniciar = false;
       gameOver.style.display = 'none';
   
-      // Redefinir a imagem do gato
-      gato.src = 'img/gato.gif';
-      gato.style.width = '150px';
-      gato.style.bottom = '0';
-      gato.style.marginLeft = '0';
+      resetarGato();
   
-      // Reiniciar a posição do banco
-      pipe.classList.remove('pipe-animation');
-      pipe.offsetWidth; // Trigger reflow
-      pipe.classList.add('pipe-animation');
-      pipe.style.right = '-80px'; 
+      resetarBanco(); 
   
       audioGameOver.pause();
       audioGameOver.currentTime = 0;
@@ -627,6 +633,10 @@ const criarletra2 = (pipePosition) => {
       if (verificarPalavraGato()) {
         clearInterval(gameInterval);
         vitoriaDisplay.style.display = 'block';
+        pipe.classList.remove('pipe-animation');
+  
+        gato.classList.remove('jump');
+        resetarGato();
         if (!falou_reiniciar){
           speak("Clique no botão para reiniciar o reconhecimento de voz. Repita a palavra...gato");
           falou_reiniciar = true;
