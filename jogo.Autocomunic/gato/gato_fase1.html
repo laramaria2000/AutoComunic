@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fase 1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .game {
+      width: 100%;
+      height: 100vh;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      background-image: url('./src/img/predio.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    button {
+      background: rgb(147, 57, 220);
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+      border: none;
+      padding: 1rem;
+      position: absolute;
+      right: 50%;
+      top: 50%;
+      transform: translate(50%, -50%);
+      cursor: pointer;
+      z-index: 1;
+    }
+    button:hover {
+      border: 2px solid rgb(59, 13, 78);
+      background: none;
+      color: rgb(76, 43, 85);
+    }
+
+    .game-over {
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.322);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .game-over h1 {
+      font-size: 3rem;
+      color: rgb(151, 12, 216);
+      text-align: center;
+      margin-top: 15rem;
+    }
+
+    .pipe {
+      position: absolute;
+      bottom: 0;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+    }
+
+    .mario {
+      width: 150px;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .predio {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .score {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 2rem;
+      color: white;
+      font-weight: bold;
+    }
+
+    .lives {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 5px;
+    }
+
+    .lives img {
+      width: 30px;
+      height: 30px;
+    }
+
+    @keyframes clouds-animation {
+      from {
+        right: -550px;
+      }
+      to {
+        right: 100%;
+      }
+    }
+
+    .pipe-animation {
+      animation: pipe-animation 2s infinite linear;
+    }
+
+    @keyframes pipe-animation {
+      from {
+        right: -80px;
+      }
+      to {
+        right: 100%;
+      }
+    }
+
+    .jump {
+      animation: jump 800ms ease-out;
+    }
+
+    @keyframes jump {
+      0% {
+        bottom: 0;
+      }
+      40% {
+        bottom: 200px;
+      }
+      50% {
+        bottom: 200px;
+      }
+      60% {
+        bottom: 200px;
+      }
+      100% {
+        bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <img class="mario" src="img/gato.gif" alt="mario">
+    <img class="pipe" src="img/banco.png" alt="cano">
+    <img class="predio" src="img/predio.png" alt="predio">
+    <div class="score">0</div>
+    <div class="lives">
+      <img src="img/cori1.png" alt="vida">
+      <img src="img/cori1.png" alt="vida">
+      <img src="img/cori1.png" alt="vida">
+    </div>
+    <button class="start" onclick="startGame()">Iniciar</button>
+  </div>
+
+  <div class="game-over">
+    <h1>Game Over</h1>
+    <button onclick="restartGame()">Reiniciar</button>
+  </div>
+
+  <script>
+    const mario = document.querySelector('.mario');
+    const pipe = document.querySelector('.pipe');
+    const start = document.querySelector('.start');
+    const gameOver = document.querySelector('.game-over');
+    const scoreDisplay = document.querySelector('.score');
+    const livesDisplay = document.querySelector('.lives');
+
+    const audioStart = new Audio('./src/audio/audio_theme.mp3');
+    const audioGameOver = new Audio('./src/audio/audio_gameover.mp3');
+
+    let score = 0;
+    let lives = 3;
+    let isJumping = false;
+    let gameInterval;
+
+    const startGame = () => {
+      pipe.classList.add('pipe-animation');
+      start.style.display = 'none';
+      score = 0;
+      lives = 3;
+      updateScore();
+      updateLives();
+
+      audioStart.play();
+
+      gameInterval = setInterval(loop, 10);
+    };
+
+    const restartGame = () => {
+      gameOver.style.display = 'none';
+      pipe.style.right = '-80px'; // reinicia a posição do cano
+
+      mario.style.bottom = '0';
+      mario.style.width = '150px'; // garante que a largura está correta
+      mario.src = './src/img/gato.gif'; // garante que a imagem correta seja exibida
+
+      audioGameOver.pause();
+      audioGameOver.currentTime = 0;
+
+      audioStart.currentTime = 0;
+      audioStart.play();
+
+      updateScore();
+      updateLives();
+
+      pipe.classList.add('pipe-animation');
+
+      gameInterval = setInterval(loop, 10);
+    };
+
+    const jump = () => {
+      if (!isJumping) {
+        isJumping = true;
+        mario.classList.add('jump');
+
+        setTimeout(() => {
+          mario.classList.remove('jump');
+          isJumping = false;
+        }, 800);
+      }
+    };
+
+    const updateScore = () => {
+      scoreDisplay.textContent = score;
+    };
+
+    const updateLives = () => {
+      livesDisplay.innerHTML = '';
+      for (let i = 0; i < lives; i++) {
+        const img = document.createElement('img');
+        img.src = 'img/cori1.png';
+        img.alt = 'vida';
+        livesDisplay.appendChild(img);
+      }
+    };
+
+    const loop = () => {
+      const pipePosition = pipe.offsetLeft;
+      const marioPosition = parseInt(window.getComputedStyle(mario).bottom.replace('px', ''));
+
+      if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
+        pipe.classList.remove('pipe-animation');
+
+        mario.classList.remove('jump');
+        mario.style.bottom = `${marioPosition}px`;
+
+        mario.src = './src/img/game-over.png';
+        mario.style.width = '10px';
+        mario.style.marginLeft = '50px';
+
+        audioStart.pause();
+        audioGameOver.play();
+
+        setTimeout(() => {
+          audioGameOver.pause();
+        }, 7000);
+
+        gameOver.style.display = 'flex';
+        lives--;
+
+        clearInterval(gameInterval);
+
+        if (lives > 0) {
+          setTimeout(restartGame, 3000);
+        } else {
+          gameOver.querySelector('h1').textContent = 'Fim de Jogo';
+        }
+      } else if (pipePosition < 0 && !pipe.classList.contains('scored')) {
+        pipe.classList.add('scored');
+        score += 5;
+        updateScore();
+      } else if (pipePosition >= 120) {
+        pipe.classList.remove('scored');
+      }
+    };
+
+    document.addEventListener('keypress', e => {
+      const tecla = e.key;
+      if (tecla === ' ') {
+        jump();
+      }
+    });
+
+    document.addEventListener('touchstart', e => {
+      if (e.touches.length) {
+        jump();
+      }
+    });
+
+    document.addEventListener('keypress', e => {
+      const tecla = e.key;
+      if (tecla === 'Enter') {
+        startGame();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <title>Fase 1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .game {
+      width: 100%;
+      height: 100vh;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      background-image: url('./img/predio.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .const restartGame {
+      background: rgb(147, 57, 220);
+      color: rgb(255, 255, 255);
+      font-weight: bold;
+      font-size: 1.5rem;
+      border: none;
+      padding: 1rem;
+      position: absolute;
+      right: 50%;
+      top: 80%;
+      transform: translate(50%, -50%);
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .reiniciar{
+      margin-bottom: 250px;
+      width: 120px;
+      height: 60px;
+      background: rgb(164, 126, 216); /* Cor do fundo */
+      color: white; /* Cor do texto do botão */
+      border: none;
+      border-radius: 10px; /* Borda mais arredondada */
+      padding: 10px 20px; /* Mais espaçamento interno */
+      font-family: 'roboto'; /* Fonte mais elegante */
+      font-size: 20px; /* Aumentei o tamanho da fonte */
+    }
+
+    .reiniciar:hover {
+      color: rgb(76, 43, 85);
+    }
+
+    .game-over {
+      width: 100%;
+      height: 100vh;
+      background: rgba(243, 157, 230, 0.322);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .game-over h1 {
+      font-size: 3rem;
+      font-family: Cambria, Cochin, Georgia, serif;
+      color: rgb(43, 15, 56);
+      text-align: center;
+      margin-top: 15rem;
+    }
+
+    .pipe {
+      position: absolute;
+      bottom: 0;
+      right: -80px;
+      width: 200px;
+      height: 200px;
+    }
+
+    .gato {
+      width: 150px;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .predio {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .score {
+      position: absolute;
+      top: 20px;
+      left: 5px;
+      display: flex;
+      align-items: center;
+      gap: 1000px; /* Espaço entre a pontuação e as vidas */
+      font-size: 2rem;
+      color: white;
+      font-weight: bold;
+    }
+
+    .lives img {
+      width: 30px;
+      height: 30px;
+    }
+
+    @keyframes clouds-animation {
+      from {
+        right: -550px;
+      }
+      to {
+        right: 100%;
+      }
+    }
+
+    .pipe-animation {
+      animation: pipe-animation 2s infinite linear;
+    }
+
+    @keyframes pipe-animation {
+      from {
+        right: -80px;
+      }
+      to {
+        right: 100%;
+      }
+    }
+
+    .jump {
+      animation: jump 800ms ease-out;
+    }
+
+    @keyframes jump {
+      0% {
+        bottom: 0;
+      }
+      40% {
+        bottom: 200px;
+      }
+      50% {
+        bottom: 200px;
+      }
+      60% {
+        bottom: 200px;
+      }
+      100% {
+        bottom: 0;
+      }
+    }
+
+    .letra {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      z-index: 1;
+    }
+
+    .letra-animacao {
+      animation: letra-animation 2s linear;
+    }
+
+    @keyframes letra-animation {
+      from {
+        right: -80px; /* Posição inicial fora da tela */
+      }
+      to {
+        right: 100%; /* Movimento para a direita */
+      }
+    }
+
+    .letras-coletadas {
+      position: absolute;
+      top: 10px; /* Ajustar conforme necessário */
+      left: 50%; /* Centralizar horizontalmente */
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    .letra-coletada {
+      width: 50px;
+      height: 50px;
+    }
+
+    .vitoria {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+      z-index: 999;
+    }
+
+    .vitoria h2 {
+      font-size: 2rem;
+      color: rgb(76, 175, 80);
+      text-align: center;
+    }
+    .toast {
+      width: 500; /* Aumenta a largura do toast */
+      background-color: rgb(198, 163, 227);
+      border-radius: 10px; /* Bordas arredondadas */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra para um efeito de profundidade */
+      height: 400px; /* Aumenta a altura do toast */
+    }
+    
+
+    .toast-header {
+      background-color:rgb(164, 126, 216);
+      color: white; /* Cor do texto no cabeçalho */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
+    }
+
+    .toast-body {
+      padding: 20px; /* Adiciona padding ao corpo do toast */
+    }
+   
+    .toast-body h6 {
+      margin: 0 0 50px; /* Margem inferior para criar mais espaço antes do botão */
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+
+    .start {
+      margin-left: 550px;
+      margin-top: 250px;
+      width: 120px;
+      height: 60px;
+      background: rgb(164, 126, 216);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-family: 'roboto';
+      font-size: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      opacity: 1;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center; /* Centraliza horizontalmente */
+      align-items: center; /* Centraliza verticalmente */
+      height: 100vh; /* Altura da tela */
+    }
+
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 500px; /* Altura do contêiner ajustada */
+    }
+
+    .start:hover {
+      background: rgb(143, 109, 190); /* Cor de fundo ao passar o mouse */
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra maior no hover */
+      opacity: 1; /* Garante que a opacidade seja 100% no hover */
+    }
+
+
+    .buttons-container {
+      position: absolute;
+      top: 50px;
+      right: 50px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .round-button1 {
+      right: 58px;
+      width: 50px;
+      height: 50px;
+      margin-top: -45px;
+      border-radius: 50%;
+      border: none;
+      background-color: rgb(147, 57, 220);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      overflow: hidden; /* Garante que a imagem não extrapole os limites do botão */
+    }
+
+    .round-button1 img {
+            width: 50px; /* Ajuste o tamanho da imagem conforme necessário */
+            height: auto; /* Mantém a proporção da imagem */
+        }
+
+    .round-button2 {
+      width: 50px;
+      height: 50px;
+      margin-top: -45px;
+      margin-right: -35px;
+      border-radius: 50%;
+      border: none;
+      background-color: rgb(147, 57, 220);
+      color: white;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; /* Garante que a imagem não extrapole os limites do botão */
+    }
+
+    .round-button2 img {
+            width: 50px; /* Ajuste o tamanho da imagem conforme necessário */
+            height: auto; /* Mantém a proporção da imagem */
+        }
+
+  </style>
+</head>
+<body>
+  <div class="game">
+    <div class="buttons-container">
+      <button  class="round-button1">
+        <img src="img/pause.png" alt="pause">
+      </button>
+      <button  class="round-button2">
+        <img src="img/inicial.png" alt="inicial">
+      </button>    
+    </div>
+    <img class="gato" src="img/gato.gif" alt="gato">
+    <img class="pipe" src="img/banco.png" alt="banco">
+    <img class="predio" src="img/predio.png" alt="predio">
+    
+
+    <div class="score">0</div>
+    <div class="lives">
+      <img src="img/cori1.png" alt="vida">
+      <img src="img/cori1.png" alt="vida">
+      <img src="img/cori1.png" alt="vida">
+    </div>
+
+
+  <div class="letras-coletadas"></div>
+    <button class="start" onclick="startGame()">Iniciar</button>
+  </div>
+
+  <div class="game-over">
+    <h1>Game Over</h1>
+    <button class="reiniciar" onclick="restartGame()">Reiniciar</button>
+  </div>
+
+  <div class="vitoria" id="vitoria">
+    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+        <div class="toast-header">
+          <img src="img/trofeu.gif" class="rounded mr-2" alt="..." style="width: 10%; height: auto;">
+          <strong class="mr-auto">Parabéns!</strong>
+        </div>
+        <div class="toast-body text-center">
+          <h4>Fale a palavra "gato" para seguir em frente</h4>
+          <br>
+          <!-- Botão abaixo do GIF -->
+          <button id="start-btn" class="btn btn-outline-" style="width: 100px;">
+            <img src="img/mic.png" alt="Ícone" style="width: 70px; height: 60px;">
+          </button>
+          <br><br>
+          <p id="result">Você disse:</p>
+          <p id="status"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    const gato = document.querySelector('.gato');
+    const pipe = document.querySelector('.pipe');
+    const start = document.querySelector('.start');
+    const gameOver = document.querySelector('.game-over');
+    const scoreDisplay = document.querySelector('.score');
+    const livesDisplay = document.querySelector('.lives');
+    const letrasColetadasDisplay = document.querySelector('.letras-coletadas');
+    const vitoriaDisplay = document.getElementById('vitoria');
+  
+    const audioStart = new Audio('./src/audio/audio_theme.mp3');
+    const audioGameOver = new Audio('./src/audio/audio_gameover.mp3');
+  
+    let score = 0;
+    let lives = 3;
+    let isJumping = false;
+    let gameInterval;
+    let gameInterval2;
+    let allLivesLost = false;
+    let letrasElementos = [];
+    let letrasColetadas = [];
+  
+    const letras = ['G', 'A', 'T', 'O'];
+    let proximaLetra = 0;
+
+    falou_reiniciar = false;
+  
+    const startGame = () => {
+      falou_reiniciar = false;
+      pipe.classList.add('pipe-animation');
+      start.style.display = 'none';
+      updateScore();
+      updateLives();
+      criarLetrasColetadas();
+  
+      audioStart.play();
+  
+      gameInterval = setInterval(loop, 10);
+      gameInterval2 = setInterval(loop, 10);
+    };
+  
+  
+    const restartGame = () => {
+      falou_reiniciar = false;
+      gameOver.style.display = 'none';
+  
+      // Redefinir a imagem do gato
+      gato.src = 'img/gato.gif';
+      gato.style.width = '150px';
+      gato.style.bottom = '0';
+      gato.style.marginLeft = '0';
+  
+      // Reiniciar a posição do banco
+      pipe.classList.remove('pipe-animation');
+      pipe.offsetWidth; // Trigger reflow
+      pipe.classList.add('pipe-animation');
+      pipe.style.right = '-80px'; 
+  
+      audioGameOver.pause();
+      audioGameOver.currentTime = 0;
+  
+      audioStart.currentTime = 0;
+      audioStart.play();
+  
+  if (allLivesLost) {
+    score = 0;
+    lives = 3;
+    allLivesLost = false;
+    // Limpar letras coletadas
+    letrasColetadas = [];
+    letrasColetadasDisplay.innerHTML = '';
+  }
+
+  updateScore();
+  updateLives();
+
+  gameInterval = setInterval(loop, 10);
+  gameInterval2 = setInterval(loop, 10);
+};
+
+const adicionarLetraColetada = (letra) => {
+  // Encontre o índice correto para a nova letra
+  const index = letras.indexOf(letra);
+
+  // Adiciona a letra na posição correta
+  letrasColetadas[index] = letra;
+
+  // Atualiza a exibição das letras coletadas
+  atualizarLetrasColetadas();
+};
+
+const atualizarLetrasColetadas = () => {
+  letrasColetadasDisplay.innerHTML = '';
+  letrasColetadas.forEach(letra => {
+    if (letra) {
+      const letraColetada = document.createElement('img');
+      letraColetada.src = `img/letra${letra}.png`;
+      letraColetada.alt = letra;
+      letraColetada.classList.add('letra-coletada');
+      letrasColetadasDisplay.appendChild(letraColetada);
+    }
+  });
+};
+
+const verificarColisaoLetras2 = () => {
+  letrasElementos.forEach((letraElemento, index) => {
+    const letraPosition = letraElemento.getBoundingClientRect();
+    const gatoPosition = gato.getBoundingClientRect();
+
+    if (
+      letraPosition.left < gatoPosition.right &&
+      letraPosition.right > gatoPosition.left &&
+      letraPosition.top < gatoPosition.bottom &&
+      letraPosition.bottom > gatoPosition.top
+    ) {
+      // Coletar a letra
+      letraElemento.style.display = 'none'; // Oculta a letra
+      letrasElementos.splice(index, 1); // Remove da lista
+
+      // Adiciona a letra na posição correta
+      adicionarLetraColetada(letraElemento.alt);
+
+      score += 10;
+      updateScore();
+    } else if (letraPosition.right < 0) {
+      // Reposiciona a letra ao lado direito da tela
+      letraElemento.style.right = '-80px'; // Ajuste conforme necessário para reposicionar a letra
+    }
+  });
+};
+const criarletra2 = (pipePosition) => {
+  const letra = letras[proximaLetra];
+  const letraElemento = document.createElement('img');
+  letraElemento.src = `img/letra${letra}.png`;
+  letraElemento.alt = letra;
+  letraElemento.classList.add('letra', 'letra-animacao');
+  letraElemento.style.bottom = '200px'; // Ajuste conforme necessário para a posição acima do banco
+
+  // Centralizar a letra em relação ao banco
+  const pipeWidth = pipe.offsetWidth;
+  const letraWidth = 50; // Largura da imagem da letra
+  letraElemento.style.right = `${window.innerWidth - pipePosition - (pipeWidth / 2) + (letraWidth / 2)}px`;
+
+  document.querySelector('.game').appendChild(letraElemento);
+  letrasElementos.push(letraElemento);
+
+  proximaLetra = (proximaLetra + 1) % letras.length;
+};
+
+
+
+    const jump = () => {
+      if (!isJumping) {
+        isJumping = true;
+        gato.classList.add('jump');
+  
+        setTimeout(() => {
+          gato.classList.remove('jump');
+          isJumping = false;
+        }, 800);
+      }
+    };
+  
+    const updateScore = () => {
+      scoreDisplay.textContent = score;
+    };
+  
+    const updateLives = () => {
+      livesDisplay.innerHTML = '';
+      for (let i = 0; i < lives; i++) {
+        const img = document.createElement('img');
+        img.src = 'img/cori1.png';
+        img.alt = 'vida';
+        livesDisplay.appendChild(img);
+      }
+    };
+  
+    const loop = () => {
+      const pipePosition = pipe.offsetLeft;
+      const gatoPosition = parseInt(window.getComputedStyle(gato).bottom.replace('px', ''));
+  
+      if (pipePosition <= 120 && pipePosition > 0 && gatoPosition < 80) {
+        pipe.classList.remove('pipe-animation');
+  
+        gato.classList.remove('jump');
+        gato.style.bottom = `${gatoPosition}px`;
+  
+        gato.src = './src/img/game-over.png';
+        gato.style.width = '10px';
+        gato.style.marginLeft = '50px';
+  
+        audioStart.pause();
+        audioGameOver.play();
+  
+        setTimeout(() => {
+          audioGameOver.pause();
+        }, 7000);
+  
+        gameOver.style.display = 'flex';
+        lives--;
+  
+        clearInterval(gameInterval);
+        clearInterval(gameInterval2);
+
+  
+        updateLives();
+        // Supondo que esta variável indica se o jogador coletou todas as letras
+        let allLettersCollected = false;
+
+        // Quando o jogador perde uma vida
+        if (lives >= 0 && !allLettersCollected) {
+          allLivesLost = false;
+          clearInterval(gameInterval2);
+          speak(`Você tem ${lives} vida${lives === 1 ? '' : 's'} restante${lives === 1 ? '' : 's'}, clique no botão para reiniciar`);
+        }
+
+        if (lives <= 0) {
+          allLivesLost = true;
+          gameOver.querySelector('h1').textContent = 'Fim de Jogo';
+        } else {
+          gameOver.querySelector('h1').textContent = `Você tem ${lives} vidas restantes.`;
+        }
+      } else if (pipePosition < 0 && !pipe.classList.contains('scored')) {
+        pipe.classList.add('scored');
+        score += 5;
+        updateScore();
+  
+        if (score % 30 === 0) {
+          criarLetra(pipePosition);
+        }
+      } else if (pipePosition >= 120) {
+        pipe.classList.remove('scored');
+      }
+  
+    verificarColisaoLetras();
+  
+      if (verificarPalavraGato()) {
+        clearInterval(gameInterval);
+        vitoriaDisplay.style.display = 'block';
+        if (!falou_reiniciar){
+          speak("Clique no botão para reiniciar o reconhecimento de voz. Repita a palavra...gato");
+          falou_reiniciar = true;
+        }
+      }
+    };
+    
+    const verificarPalavraGato = () => {
+      for (let i = 0; i < letras.length; i++) {
+        if (!letrasColetadas.includes(letras[i])) {
+          return false;
+        }
+      }
+      return true;
+    }
+  
+    
+    const criarLetra = (pipePosition) => {
+      const letra = letras[proximaLetra];
+      const letraElemento = document.createElement('img');
+      letraElemento.src = `img/letra${letra}.png`;
+      letraElemento.alt = letra;
+      letraElemento.classList.add('letra', 'letra-animacao');
+      letraElemento.style.bottom = '200px'; // Ajuste conforme necessário para a posição acima do banco
+  
+      // Centralizar a letra em relação ao banco
+      const pipeWidth = pipe.offsetWidth;
+      const letraWidth = 50; // Largura da imagem da letra
+      letraElemento.style.right = `${window.innerWidth - pipePosition - (pipeWidth / 2) + (letraWidth / 2)}px`;
+  
+      document.querySelector('.game').appendChild(letraElemento);
+      letrasElementos.push(letraElemento);
+  
+      proximaLetra = (proximaLetra + 1) % letras.length;
+    };
+  
+    const criarLetrasColetadas = () => {
+      letrasColetadas.forEach(letra => {
+        const letraColetada = document.createElement('img');
+        letraColetada.src = `img/letra${letra}.png`;
+        letraColetada.alt = letra;
+        letraColetada.classList.add('letra-coletada');
+        letrasColetadasDisplay.appendChild(letraColetada);
+      });
+    };
+  
+const verificarColisaoLetras = () => {
+  letrasElementos.forEach((letraElemento, index) => {
+    const letraPosition = letraElemento.getBoundingClientRect();
+    const gatoPosition = gato.getBoundingClientRect();
+
+    if (
+      letraPosition.left < gatoPosition.right &&
+      letraPosition.right > gatoPosition.left &&
+      letraPosition.top < gatoPosition.bottom &&
+      letraPosition.bottom > gatoPosition.top
+    ) {
+      // Coletar a letra
+      letraElemento.style.display = 'none'; // Oculta a letra
+      letrasElementos.splice(index, 1); // Remove da lista
+
+      // Mostra a letra coletada no topo
+      const letraColetada = document.createElement('img');
+      letraColetada.src = letraElemento.src;
+      letraColetada.alt = letraElemento.alt;
+      letraColetada.classList.add('letra-coletada');
+      letrasColetadasDisplay.appendChild(letraColetada);
+
+      letrasColetadas.push(letraElemento.alt); // Adiciona à lista de letras coletadas
+
+      score += 10;
+      updateScore();
+    } else if (letraPosition.right < 0) {
+      // Reposiciona a letra ao lado direito da tela
+      letraElemento.style.right = '-80px'; // Ajuste conforme necessário para reposicionar a letra
+    }
+  });
+};
+  
+    document.addEventListener('keypress', e => {
+      const tecla = e.key;
+      if (tecla === ' ') {
+        jump();
+      }
+    });
+  
+    document.addEventListener('touchstart', e => {
+      if (e.touches.length) {
+        jump();
+      }
+    });
+  
+    document.addEventListener('keypress', e => {
+      const tecla = e.key;
+      if (tecla === 'Enter') {
+        startGame();
+      }
+    });
+    
+    const startButton = document.getElementById('start-btn');
+    const resultPara = document.getElementById('result');
+    const statusPara = document.getElementById('status');
+  
+    const expectedWord = "gato";
+
+// Verifica se o navegador suporta a API de reconhecimento de voz
+if ('webkitSpeechRecognition' in window) {
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = 'pt-BR';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+        statusPara.textContent = "";
+        console.log();
+    };
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.trim().toLowerCase();
+        resultPara.textContent = ` ${transcript}`;
+        console.log(` ${transcript}`);
+
+        if (transcript === expectedWord) {
+            vitoriaDisplay.style.display = 'block';
+            speak("Você venceu! Parabéns!");
+            console.log("Palavra correta reconhecida.");
+        } else {
+            console.log("Palavra incorreta reconhecida.");
+        }
+    };
+
+    recognition.onerror = (event) => {
+        statusPara.textContent = `Erro no reconhecimento: ${event.error}`;
+        console.error(`Erro no reconhecimento de voz: ${event.error}`);
+    };
+
+    recognition.onend = () => {
+        console.log();
+        // Verifica se a última palavra dita foi a correta e fala a mensagem
+        if (resultPara.textContent.includes(expectedWord)) {
+            speak("Parabéns! Você passou de fase!");
+        } else {
+            speak("Tente novamente!");
+            console.log("Palavra incorreta reconhecida.");
+        }
+    };
+
+    startButton.addEventListener('click', () => {
+        recognition.start();
+    });
+} else {
+    statusPara.textContent = "Seu navegador não suporta reconhecimento de voz.";
+    console.log("API de reconhecimento de voz não suportada.");
+}
+
+function speak(message) {
+    const utterance = new SpeechSynthesisUtterance(message);
+    utterance.lang = 'pt-BR';
+    window.speechSynthesis.speak(utterance);
+}
+
+    function speak(message) {
+      const utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = 'pt-BR';
+      window.speechSynthesis.speak(utterance);
+    }
+
+    $(document).ready(function(){
+      $('.toast').toast('show');
+    });    
+
+
+  </script>
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
