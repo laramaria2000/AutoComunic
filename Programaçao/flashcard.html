@@ -18,36 +18,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar Example</title>
     <style>
-        
+        .navbar-custom {
+            background-color: #1e706c; /* Cor personalizada da barra de navegação */
+        }
         .navbar .navbar-brand {
             display: flex;
             align-items: center;
         }
         .navbar .navbar-brand img {
-            margin-right: 985px; /* Ajuste o espaço entre as imagens conforme necessário */
+            margin-right: 10px; /* Ajuste o espaço entre as imagens conforme necessário */
         }
-        
+        .logo-img {
+            width: 160px;  /* Ajuste a largura conforme desejado */
+            height: auto;  /* Mantém a proporção da altura da imagem */
+        }
+        .footer-custom img {
+            margin-top: 20px;
+            margin-left: 25px; /* Ajuste conforme necessário */
+        }
+        .footer-custom .btn-custom {
+            background-color: #ffdabf; /* Cor de fundo dos botões */
+            border-radius: 12px; /* Bordas arredondadas */
+            padding: 10px 20px; /* Espaçamento interno dos botões */
+            font-weight: bold; /* Texto em negrito */
+            color: #333; /* Cor do texto */
+            text-align: center; /* Alinha o texto no centro */
+            display: inline-block; /* Alinha os botões horizontalmente */
+            text-decoration: none; /* Remove o sublinhado dos links */
+            margin: 0 10px; /* Espaço entre os botões */
+        }
+
+        .footer-custom .btn-custom:hover {
+            background-color: #e6c7a4; /* Cor de fundo dos botões ao passar o mouse */
+            color: #333; /* Mantém a cor do texto */
+        }
+        .footer-custom {
+            background-color: #1e706c; /* Cor desejada para o fundo do rodapé */
+        }
     </style>
     <!-- Inclua o CSS do Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="file:///C:/Users/Reginaldo/OneDrive%20-%20IFRN/projeto_integrador/projeto%201/index.html#">
-            <img src="logo.png" alt="logo" width="105" height="105">
-        </a>
-        <a class="navbar-brand" href="file:///C:/Users/Reginaldo/OneDrive%20-%20IFRN/projeto_integrador/projeto%201/index.html#">
-            <img src="pais (2).png" alt="area dos pais" width="105" height="105">
-        </a>
-            
-        
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <!-- Outros itens de navegação podem ser adicionados aqui -->
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="file:///C:/Users/Reginaldo/OneDrive%20-%20IFRN/projeto_integrador/projeto%201/index.html#">
+                <img src="logo1.png" alt="logo" class="logo-img">
+            </a>
+            <form class="d-flex">
+                <a class="navbar-brand" href="file:///C:/Users/Reginaldo/OneDrive%20-%20IFRN/projeto_integrador/projeto%201/index.html#">
+                    <img src="paislogo.png" alt="area dos pais" width="60" height="60">
+                </a>
+            </form>
         </div>
     </nav>
-
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-3 mb-4">
@@ -192,11 +216,34 @@
         </div>
     </div>
 </div>
-
+<br>
+<div class="footer-custom">
+    <!-- Logo com ajustes de margem -->
+    <img src="logo1.png" alt="logo" width="180" height="100" style="margin-top: 20px; margin-right: 40px;">
+    <div class="text-white" style="float: right;">
+        <div class="container p-4 pb-0">
+            <section class="mb-4">
+                <!-- Botão do Gmail -->
+                <a class="btn btn-custom m-1" href="mailto:ifbook2023@gmail.com" role="button">
+                    Gmail
+                </a>
+                <!-- Botão do Instagram -->
+                <a class="btn btn-custom m-1" href="https://www.instagram.com/autocomunic?igsh=MXF5ZWJldHB1Mnp5Yg==" role="button">
+                    Instagram
+                </a>
+            </section>
+        </div>
+    </div>
+    <hr class="my-2">
+    <div class="text-center p-3">
+        © 2024 Copyright:
+        <a class="text-dark" href="file:///C:/Users/Reginaldo/OneDrive%20-%20IFRN/projeto_integrador/index.html">AutoComunic.com</a>
+    </div>
+</div>
 <style>
     body {
         font-family: 'Poppins', sans-serif;
-        background-color: #f4f4f9;
+        background-color: #4caba6 ;
     }
     .navbar {
         margin-bottom: 20px;
@@ -209,7 +256,7 @@
         cursor: pointer;
     }
     .card-btn:hover .card {
-        background-color: #bbbbff;
+        background-color: #ffdabf ;
     }
     .card {
         text-align: center;
