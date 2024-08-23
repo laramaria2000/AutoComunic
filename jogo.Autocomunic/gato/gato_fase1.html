@@ -431,7 +431,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
     const pauseButton = document.getElementById('pause-btn');
-    const despauseButton = document.getElementById('despause-btn');
+    const despauseButton = document.getElementById('despause-btn')
     const toastContainer = document.getElementById('toast-container');
 
     if (!pauseButton || !despauseButton || !toastContainer) {
@@ -454,13 +454,49 @@
       showPauseToast(); // Mostra o toast de pausa
     };
 
-    const resumeGame = () => {
-      if (!isGamePaused) return; // Se o jogo não estiver pausado, não faz nada
+    let isPaused = false;
+    const pipe = document.querySelector('.pipe');
+    const pauseButton2 = document.getElementById('pause-btn');
+    const despauseButton2 = document.getElementById('despause-btn');
+    const vitoriaDisplay = document.getElementById('vitoria');
 
-      isGamePaused = false; // Define que o jogo não está mais pausado
-      startGameLoop(); // Retoma o intervalo do loop do jogo
-      hidePauseToast(); // Esconde o toast de pausa
-    };
+    function pauseAnimation() {
+      pipe.style.animationPlayState = 'paused';
+      gato.style.animationPlayState = 'paused';
+    }
+
+    function resumeAnimation() {
+      pipe.style.animationPlayState = 'running';
+      gato.style.animationPlayState = 'running';
+    }
+
+    pauseButton.addEventListener('click', () => {
+      isPaused = true;
+      pauseAnimation();
+      // Mostrar a tela de pausa
+      document.getElementById('toast-container').style.display = 'block';
+    });
+
+    despauseButton.addEventListener('click', () => {
+      isPaused = false;
+      resumeAnimation();
+      // Esconder a tela de pausa
+      document.getElementById('toast-container').style.display = 'none';
+    });
+
+    function verificarPalavraGato() {
+      // Lógica para verificar a palavra "gato"
+      if (true) {  // Substitua com a lógica real
+        clearInterval(gameInterval);
+        vitoriaDisplay.style.display = 'block';
+        pauseAnimation();
+        
+        gato.classList.remove('jump');
+        resetarGato();
+        return true;
+      }
+      return false;
+    }
 
     const showPauseToast = () => {
       toastContainer.style.display = 'flex'; // Mostra o toast
