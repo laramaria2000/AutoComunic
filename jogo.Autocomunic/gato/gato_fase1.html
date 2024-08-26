@@ -544,9 +544,7 @@
     const livesDisplay = document.querySelector('.lives');
     const letrasColetadasDisplay = document.querySelector('.letras-coletadas');
     const vitoriaDisplay = document.getElementById('vitoria');
-  
-    const audioStart = new Audio('./src/audiotrilhasonora.mp3');
-    
+      
   
     let score = 0;
     let lives = 3;
@@ -583,9 +581,7 @@
       updateScore();
       updateLives();
       criarLetrasColetadas();
-  
-      audioStart.play();
-  
+    
       gameInterval = setInterval(loop, 10);
       gameInterval2 = setInterval(loop, 10);
     };
@@ -599,11 +595,6 @@
   
       resetarlixeira(); 
   
-      audioGameOver.pause();
-      audioGameOver.currentTime = 0;
-  
-      audioStart.currentTime = 0;
-      audioStart.play();
   
   if (allLivesLost) {
     score = 0;
@@ -732,12 +723,6 @@ const criarletra2 = (pipePosition) => {
         gato.style.width = '10px';
         gato.style.marginLeft = '50px';
   
-        audioStart.pause();
-        audioGameOver.play();
-  
-        setTimeout(() => {
-          audioGameOver.pause();
-        }, 7000);
   
         gameOver.style.display = 'flex';
         lives--;
