@@ -367,6 +367,7 @@
     <img class="gato" src="img/gato.gif" alt="gato">
     <img class="pipe" src="img/lixeira.png" alt="lixeira">
 
+
     <div class="toast-container" id="toast-container" style="display: none;">
       <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 200px;">
         <div class="custom-toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
@@ -393,8 +394,21 @@
 
 
   <div class="letras-coletadas"></div>
-    <button class="start" onclick="startGame()">Iniciar</button>
+    <button id="startsong" class="start" onclick="startGame()">Iniciar</button>
   </div>
+
+  <audio id="trilhaSonora" src="audio/trilhasonora.mp3" loop></audio>
+
+  <script>
+      document.getElementById('startsong').addEventListener('click', function() {
+          const audio = document.getElementById('trilhaSonora');
+          audio.play().catch(error => {
+              console.error("Erro ao reproduzir o áudio:", error);
+          });
+      });
+  </script>
+
+
 
   <div class="game-over">
     <h1>Game Over</h1>
@@ -500,6 +514,23 @@
 
     const showPauseToast = () => {
       toastContainer.style.display = 'flex'; // Mostra o toast
+      if (isPaused) {
+          speak('Você acionou o pause, para voltar o jogo clique no botão.');
+        }
+
+        // Verificação da posição do pipe e atualização de pontuação
+        if (pipePosition < 0 && !pipe.classList.contains('scored')) {
+          pipe.classList.add('scored');
+          score += 5;
+          updateScore();
+
+          if (score % 30 === 0) {
+            criarLetra(pipePosition);
+          }
+        } else if (pipePosition >= 120) {
+          pipe.classList.remove('scored');
+        }
+      
     };
 
     const hidePauseToast = () => {
@@ -680,7 +711,6 @@ const criarletra2 = (pipePosition) => {
 
   proximaLetra = (proximaLetra + 1) % letras.length;
 };
-
 
 
     const jump = () => {
