@@ -81,11 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
     toastContainer.style.display = "none"; // Esconde o toast
   };
 
-  // Adiciona o evento de clique ao botão de despausar dentro do toast
-  despauseButton.addEventListener("click", () => {
-    resumeGame(); // Retoma o jogo quando o botão de despausar é clicado
-  });
-
   // Adiciona o evento de clique ao botão de pausar
   pauseButton.addEventListener("click", pauseGame);
 
