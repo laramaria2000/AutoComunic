@@ -406,46 +406,6 @@
             console.error("Erro ao reproduzir o áudio:", error);
         });
     });
-  
-    function handleCollision() {
-        const audio = document.getElementById('trilhaSonora');
-        if (audio) {
-            audio.pause(); // Para o áudio
-            audio.currentTime = 0; // Reinicia o áudio para o início
-            console.log("Áudio pausado e reiniciado."); // Mensagem de depuração
-        } else {
-            console.error("Elemento de áudio não encontrado.");
-        }
-    }
-  
-    function detectCollision(gato, pipe) {
-        const gatoRect = gato.getBoundingClientRect();
-        const pipeRect = pipe.getBoundingClientRect();
-  
-        const hasCollision = !(gatoRect.right < pipeRect.left ||
-                               gatoRect.left > pipeRect.right ||
-                               gatoRect.bottom < pipeRect.top ||
-                               gatoRect.top > pipeRect.bottom);
-  
-        if (hasCollision) {
-            console.log("Colisão detectada."); // Mensagem de depuração
-            handleCollision();
-        }
-    }
-  
-    function gameLoop() {
-        const gato = document.getElementById('gato');
-        const pipe = document.getElementById('pipe');
-  
-        if (gato && pipe) {
-            detectCollision(gato, pipe);
-        } else {
-            console.error("Elementos de jogo não encontrados.");
-        }
-  
-        requestAnimationFrame(gameLoop);
-    }
-  </script>
 
   </script>
 
