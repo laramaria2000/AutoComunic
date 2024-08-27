@@ -27,7 +27,7 @@
     }
 
     .const restartGame {
-      background: rgb(147, 57, 220);
+      background: #1a3755;
       color: rgb(255, 255, 255);
       font-weight: bold;
       font-size: 1.5rem;
@@ -45,7 +45,7 @@
       margin-bottom: 250px;
       width: 120px;
       height: 60px;
-      background: rgb(164, 126, 216); /* Cor do fundo */
+      background:  #284869; /* Cor do fundo */
       color: white; /* Cor do texto do botão */
       border: none;
       border-radius: 10px; /* Borda mais arredondada */
@@ -55,13 +55,13 @@
     }
 
     .reiniciar:hover {
-      color: rgb(76, 43, 85);
+      color: #264e79;
     }
 
     .game-over {
       width: 100%;
       height: 100vh;
-      background: rgba(243, 157, 230, 0.322);
+      background: #1a3755;
       display: none;
       align-items: center;
       justify-content: center;
@@ -73,7 +73,7 @@
     .game-over h1 {
       font-size: 3rem;
       font-family: Cambria, Cochin, Georgia, serif;
-      color: rgb(43, 15, 56);
+      color: rgb(54, 54, 125);
       text-align: center;
       margin-top: 15rem;
     }
@@ -217,7 +217,7 @@
     }
     .toast {
       width: 500; /* Aumenta a largura do toast */
-      background-color: rgb(198, 163, 227);
+      background-color: #34567b;
       border-radius: 10px; /* Bordas arredondadas */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra para um efeito de profundidade */
       height: 400px; /* Aumenta a altura do toast */
@@ -225,7 +225,7 @@
     
 
     .toast-header {
-      background-color:rgb(164, 126, 216);
+      background-color:#34567b;
       color: white; /* Cor do texto no cabeçalho */
       border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
     }
@@ -294,7 +294,7 @@
       margin-top: -45px;
       border-radius: 50%;
       border: none;
-      background-color: rgb(147, 57, 220);
+      background-color: #34567b;
       color: white;
       display: flex;
       align-items: center;
@@ -315,7 +315,7 @@
       margin-right: -35px;
       border-radius: 50%;
       border: none;
-      background-color: rgb(147, 57, 220);
+      background-color: #34567b;
       color: white;
       font-size: 1.5rem;
       display: flex;
@@ -353,7 +353,7 @@
   <div class="game">
     <div class="game">
       <video class="background-video" autoplay muted loop>
-        <source src="img/cenario.mp4" type="video/mp4">
+        <source src="img/Cenário_gato.mp4" type="video/mp4">
         Seu navegador não suporta o vídeo.
       </video>
     <div class="buttons-container">
@@ -382,7 +382,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>    
     
 
     <div class="score">0</div>
@@ -400,12 +400,53 @@
   <audio id="trilhaSonora" src="audio/trilhasonora.mp3" loop></audio>
 
   <script>
-      document.getElementById('startsong').addEventListener('click', function() {
-          const audio = document.getElementById('trilhaSonora');
-          audio.play().catch(error => {
-              console.error("Erro ao reproduzir o áudio:", error);
-          });
-      });
+    document.getElementById('startsong').addEventListener('click', function() {
+        const audio = document.getElementById('trilhaSonora');
+        audio.play().catch(error => {
+            console.error("Erro ao reproduzir o áudio:", error);
+        });
+    });
+  
+    function handleCollision() {
+        const audio = document.getElementById('trilhaSonora');
+        if (audio) {
+            audio.pause(); // Para o áudio
+            audio.currentTime = 0; // Reinicia o áudio para o início
+            console.log("Áudio pausado e reiniciado."); // Mensagem de depuração
+        } else {
+            console.error("Elemento de áudio não encontrado.");
+        }
+    }
+  
+    function detectCollision(gato, pipe) {
+        const gatoRect = gato.getBoundingClientRect();
+        const pipeRect = pipe.getBoundingClientRect();
+  
+        const hasCollision = !(gatoRect.right < pipeRect.left ||
+                               gatoRect.left > pipeRect.right ||
+                               gatoRect.bottom < pipeRect.top ||
+                               gatoRect.top > pipeRect.bottom);
+  
+        if (hasCollision) {
+            console.log("Colisão detectada."); // Mensagem de depuração
+            handleCollision();
+        }
+    }
+  
+    function gameLoop() {
+        const gato = document.getElementById('gato');
+        const pipe = document.getElementById('pipe');
+  
+        if (gato && pipe) {
+            detectCollision(gato, pipe);
+        } else {
+            console.error("Elementos de jogo não encontrados.");
+        }
+  
+        requestAnimationFrame(gameLoop);
+    }
+  </script>
+
   </script>
 
 
@@ -438,9 +479,6 @@
   </div>
   
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -970,9 +1008,7 @@ function speak(message) {
       $('.toast').toast('show');
     });    
 
-
   </script>
-  
   
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
