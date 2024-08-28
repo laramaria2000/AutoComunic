@@ -1,6 +1,6 @@
 const startsong = document.getElementById("startsong");
-const audio = document.getElementById("trilhaSonora");
-audio.volume = 0.3;
+const music = document.getElementById("trilhaSonora");
+music.volume = 0.3;
 
 document.addEventListener("DOMContentLoaded", () => {
   const pauseButton = document.getElementById("pause-btn");
@@ -129,7 +129,7 @@ let proximaLetra = 0;
 
 falou_reiniciar = false;
 
-startsong.addEventListener("click", () => audio.play());
+startsong.addEventListener("click", () => music.play());
 
 const resetarGato = () => {
   gato.src = "img/gato.gif";
@@ -508,8 +508,8 @@ if ("webkitSpeechRecognition" in window) {
 }
 
 function speak(message) {
-  let last_volume = audio.volume;
-  audio.volume = 0.1;
+  let last_volume = music.volume;
+  music.volume = 0.1;
 
   const utterance = new SpeechSynthesisUtterance(message);
   utterance.lang = "pt-BR";
@@ -517,7 +517,7 @@ function speak(message) {
   window.speechSynthesis.speak(utterance);
 
   utterance.onend = () => {
-    audio.volume = last_volume;
+    music.volume = last_volume;
   };
 }
 
