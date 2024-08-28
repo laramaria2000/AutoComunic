@@ -217,10 +217,10 @@
     }
     .toast {
       width: 500; /* Aumenta a largura do toast */
-      background-color: #34567b;
+      background-color: #ebf5ff;
       border-radius: 10px; /* Bordas arredondadas */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra para um efeito de profundidade */
-      height: 400px; /* Aumenta a altura do toast */
+      height: 300px; /* Aumenta a altura do toast */
       opacity: unset;
 
     }
@@ -237,14 +237,15 @@
     }
      
     .toast-body h6 {
+      color: #1a3755;
       margin: 0 0 50px; /* Margem inferior para criar mais espaço antes do botão */
-      font-family: Georgia, 'Times New Roman', Times, serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
 
     .start {
-      margin-left: 550px;
-      margin-top: 250px;
+      margin-left: 670px;
+      margin-top: 300px;
       width: 120px;
       height: 60px;
       background: rgb(20, 50, 96);
@@ -257,6 +258,7 @@
       font-size: 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       opacity: 1;
+      
     }
 
     .container {
@@ -342,8 +344,13 @@
       z-index: 1000; /* Para garantir que o toast apareça sobre outros elementos */
     }
 
+    .toast-container h2{
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      color: #1a3755;
+    }
+
     .custom-toast {
-      background: white; /* Cor de fundo do toast */
+      background-color: #ebf5ff; /* Cor de fundo do toast */
       border-radius: 10px; /* Arredonda as bordas do toast */
       padding: 0px; /* Espaço interno dentro do toast */
     }
@@ -371,7 +378,7 @@
 
 
     <div class="toast-container" id="toast-container" style="display: none;">
-      <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+      <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 200px; width: 350px">
         <div class="custom-toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
           <div class="toast-header">
             <img src="img/pause.png" class="rounded mr-2" alt="Pause Icon" style="width: 10%; height: auto;">
@@ -380,7 +387,8 @@
           <div class="toast-body text-center">
             <h4>Deseja continuar?</h4>
             <br><br><br>
-            <button id="despause-btn" class="btn btn-primary">Despause</button>
+            <button id="despause-btn" class="btn btn-success">Sim</button>
+            <button id="home-btn" class="btn btn-danger" href="">Não</button>
           </div>
         </div>
       </div>
@@ -407,10 +415,10 @@
   </div>
 
   <div class="vitoria" id="vitoria">
-    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 200px;">
+    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 100px;">
       <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
         <div class="toast-header">
-          <img src="img/trofeu.gif" class="rounded mr-2" alt="..." style="width: 10%; height: auto;">
+          <img src="img/trofeu.png" class="rounded mr-2" alt="..." style="width: 10%; height: auto;">
           <strong class="mr-auto">Parabéns!</strong>
         </div>
         <div class="toast-body text-center">
@@ -422,7 +430,7 @@
           </button>
           <br><br>
           <p id="result">Você disse:</p>
-          <p id="status"></p>
+          <p id="status"></p> 
         </div>
       </div>
     </div>
