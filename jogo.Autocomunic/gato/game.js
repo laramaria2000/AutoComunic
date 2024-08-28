@@ -123,11 +123,10 @@ let allLivesLost = false;
 let letrasElementos = [];
 let letrasColetadas = [];
 let ignoreCollision = false;
+let falou_reiniciar = false;
 
 const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
-
-falou_reiniciar = false;
 
 startsong.addEventListener("click", () => music.play());
 
