@@ -430,25 +430,32 @@ const verificarColisaoLetras = () => {
   });
 };
 
+let lastClickTime = 0; // Para rastrear o tempo do último clique
+
 document.addEventListener("keypress", (e) => {
   const tecla = e.key;
   if (tecla === " ") {
     jump();
+  } else if (tecla === "Enter") {
+    startGame();
   }
 });
 
 document.addEventListener("touchstart", (e) => {
   if (e.touches.length) {
     jump();
+    jump();
   }
 });
 
-document.addEventListener("keypress", (e) => {
-  const tecla = e.key;
-  if (tecla === "Enter") {
-    startGame();
+document.addEventListener("dblclick", (e) => {
+  const currentTime = new Date().getTime();
+  if (currentTime - lastClickTime < 300) { // Considera 300 ms como intervalo para duplo clique
+    jump();
   }
+  lastClickTime = currentTime;
 });
+
 
 const startButton = document.getElementById("start-btn");
 const resultPara = document.getElementById("result");
