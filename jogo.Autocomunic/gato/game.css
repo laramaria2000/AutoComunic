@@ -231,21 +231,25 @@
 }
 
 .start {
-  margin-left: 670px;
-  margin-top: 300px;
-  width: 120px;
-  height: 60px;
+  margin-top: 40vh; /* Usa unidade de altura da viewport */
+  margin-left: auto;
+  margin-right: auto;
+  width: 15vw; /* Largura relativa ao tamanho da viewport */
+  height: auto; /* Ajusta a altura automaticamente */
   background: rgb(20, 50, 96);
   color: white;
   border: none;
   border-radius: 10px;
-  padding: 10px 20px;
+  padding: 10px 5vw; /* Padding ajustável com a largura da viewport */
   cursor: pointer;
-  font-family: "roboto";
-  font-size: 20px;
+  font-family: "Roboto";
+  font-size: 2vw; /* Tamanho de fonte responsivo */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   opacity: 1;
+  text-align: center; /* Centraliza o texto */
+  display: block; /* Centraliza o botão no container */
 }
+
 
 .container {
   display: flex;
