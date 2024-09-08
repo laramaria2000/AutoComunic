@@ -2,6 +2,9 @@ const startsong = document.getElementById("startsong");
 const music = document.getElementById("trilhaSonora");
 music.volume = 0.3;
 
+const music_jump = document.getElementById("jump_sound");
+music.volume = 0.3;
+
 document.addEventListener("DOMContentLoaded", () => {
   const pauseButton = document.getElementById("pause-btn");
   const despauseButton = document.getElementById("despause-btn");
@@ -129,6 +132,8 @@ const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
+startsong.addEventListener("isjumping", () => jump_sound.play());
+
 
 const resetarGato = () => {
   gato.src = "img/gato.gif";
