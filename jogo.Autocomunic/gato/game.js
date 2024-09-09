@@ -1,9 +1,9 @@
 const startsong = document.getElementById("startsong");
 const music = document.getElementById("trilhaSonora");
-music.volume = 0.3;
+music.volume = 0.2;
 
-const music_jump = document.getElementById("jump_sound");
-music.volume = 0.3;
+const jump_sound = document.getElementById("jump");
+music.volume = 0.25;
 
 document.addEventListener("DOMContentLoaded", () => {
   const pauseButton = document.getElementById("pause-btn");
@@ -131,8 +131,9 @@ let falou_reiniciar = false;
 const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
 
+
 startsong.addEventListener("click", () => music.play());
-startsong.addEventListener("isjumping", () => jump_sound.play());
+startsong.addEventListener("jump", () => jump_sound.play());
 
 
 const resetarGato = () => {
