@@ -2,7 +2,7 @@ const startsong = document.getElementById("startsong");
 const music = document.getElementById("trilhaSonora");
 music.volume = 0.2;
 
-const jump_sound = document.getElementById("jump");
+const jump_sound = document.getElementById("isjumping");
 music.volume = 0.25;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -133,7 +133,7 @@ let proximaLetra = 0;
 
 
 startsong.addEventListener("click", () => music.play());
-startsong.addEventListener("jump", () => jump_sound.play());
+startsong.addEventListener("isjumping", () => jump_sound.play());
 
 
 const resetarGato = () => {
