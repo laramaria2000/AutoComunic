@@ -132,10 +132,8 @@ let falou_reiniciar = false;
 const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
 
-
 startsong.addEventListener("click", () => music.play());
 startsound.addEventListener("isjumping", () => jump_sound.play());
-
 
 const resetarGato = () => {
   gato.src = "img/gato.gif";
@@ -329,6 +327,9 @@ const loop = () => {
     if (lives <= 0) {
       allLivesLost = true;
       gameOver.querySelector("h1").textContent = "Fim de Jogo";
+      letrasElementos = [];
+      letrasColetadas = [];
+      proximaLetra = 0;
     } else {
       gameOver.querySelector(
         "h1"
@@ -457,12 +458,12 @@ document.addEventListener("touchstart", (e) => {
 
 document.addEventListener("dblclick", (e) => {
   const currentTime = new Date().getTime();
-  if (currentTime - lastClickTime < 300) { // Considera 300 ms como intervalo para duplo clique
+  if (currentTime - lastClickTime < 300) {
+    // Considera 300 ms como intervalo para duplo clique
     jump();
   }
   lastClickTime = currentTime;
 });
-
 
 const startButton = document.getElementById("start-btn");
 const resultPara = document.getElementById("result");
