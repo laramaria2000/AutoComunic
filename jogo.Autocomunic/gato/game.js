@@ -205,7 +205,7 @@ const recomeçar = () => {
   updateLives();
 
   gameInterval = setInterval(loop, 10);
-  gameInterval2 = setInterval(loop, 10);
+  gameInterval2 = setInterval(loop, 10); 
 };
 
 const adicionarLetraColetada = (letra) => {
