@@ -1,19 +1,16 @@
 const startsong = document.getElementById("startsong");
 const music = document.getElementById("trilhaSonora");
-music.volume = 0.5;
+music.volume = 0.2;
 
-const sound = document.getElementById("jump_sound");
-sound.volume = 0.2;
+const jump_sound = document.getElementById("jump");
+music.volume = 0.25;
 
 document.addEventListener("DOMContentLoaded", () => {
   const pauseButton = document.getElementById("pause-btn");
   const despauseButton = document.getElementById("despause-btn");
+  const reco = document.getElementById("round-button3");
   const toastContainer = document.getElementById("toast-container");
 
-  if (!pauseButton || !despauseButton || !toastContainer) {
-    console.error("Elementos de controle não encontrados.");
-    return;
-  }
 
   let isGamePaused = false;
   let gameLoopInterval;
@@ -128,12 +125,13 @@ let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
 
+letrasColetadas = ["G", "A", "T", "O"]
+
 const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
 
-
 startsong.addEventListener("click", () => music.play());
-startsong.addEventListener("keypress", () => sound.play());
+startsong.addEventListener("jump", () => jump_sound.play());
 
 
 const resetarGato = () => {
@@ -163,6 +161,30 @@ const startGame = () => {
 };
 
 const restartGame = () => {
+  falou_reiniciar = false;
+  gameOver.style.display = "none";
+
+  resetarGato();
+
+  resetarlixeira();
+
+  if (allLivesLost) {
+    score = 0;
+    lives = 3;
+    allLivesLost = false;
+    // Limpar letras coletadas
+    letrasColetadas = [];
+    letrasColetadasDisplay.innerHTML = "";
+  }
+
+  updateScore();
+  updateLives();
+
+  gameInterval = setInterval(loop, 10);
+  gameInterval2 = setInterval(loop, 10);
+};
+
+const recomeçar = () => {
   falou_reiniciar = false;
   gameOver.style.display = "none";
 
@@ -328,6 +350,9 @@ const loop = () => {
     if (lives <= 0) {
       allLivesLost = true;
       gameOver.querySelector("h1").textContent = "Fim de Jogo";
+      letrasElementos = [];
+      letrasColetadas = [];
+      proximaLetra = 0;
     } else {
       gameOver.querySelector(
         "h1"
@@ -456,12 +481,12 @@ document.addEventListener("touchstart", (e) => {
 
 document.addEventListener("dblclick", (e) => {
   const currentTime = new Date().getTime();
-  if (currentTime - lastClickTime < 300) { // Considera 300 ms como intervalo para duplo clique
+  if (currentTime - lastClickTime < 5) {
+    // Considera 300 ms como intervalo para duplo clique
     jump();
   }
   lastClickTime = currentTime;
 });
-
 
 const startButton = document.getElementById("start-btn");
 const resultPara = document.getElementById("result");
