@@ -2,8 +2,6 @@ const startsong = document.getElementById("startsong");
 const music = document.getElementById("trilhaSonora");
 music.volume = 0.2;
 
-const jump_sound = document.getElementById("jump");
-music.volume = 0.25;
 
 document.addEventListener("DOMContentLoaded", () => {
   const pauseButton = document.getElementById("pause-btn");
@@ -116,7 +114,6 @@ const vitoriaDisplay = document.getElementById("vitoria");
 
 let score = 0;
 let lives = 3;
-let isJumping = false;
 let gameInterval;
 let gameInterval2;
 let allLivesLost = false;
@@ -131,8 +128,6 @@ const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
-startsong.addEventListener("jump", () => jump_sound.play());
-
 
 const resetarGato = () => {
   gato.src = "img/gato.gif";
@@ -279,17 +274,6 @@ const criarletra2 = (pipePosition) => {
   proximaLetra = (proximaLetra + 1) % letras.length;
 };
 
-const jump = () => {
-  if (!isJumping) {
-    isJumping = true;
-    gato.classList.add("jump");
-
-    setTimeout(() => {
-      gato.classList.remove("jump");
-      isJumping = false;
-    }, 800);
-  }
-};
 
 const updateScore = () => {
   scoreDisplay.textContent = score;
@@ -475,7 +459,6 @@ document.addEventListener("keypress", (e) => {
 document.addEventListener("touchstart", (e) => {
   if (e.touches.length) {
     jump();
-    jump();
   }
 });
 
@@ -487,6 +470,30 @@ document.addEventListener("dblclick", (e) => {
   }
   lastClickTime = currentTime;
 });
+
+let isJumping = false; // Variável para controlar o estado do pulo
+
+function jump() {
+  if (!isJumping) {
+    isJumping = true;
+    gato.classList.add("jump");
+
+    // Reproduz o som do pulo desde o início e pausa ao final
+    jump_sound.currentTime = 0; // Reinicia o som do início
+    jump_sound.play();
+
+    // Pausa o som após 800ms (ou a duração do pulo)
+    setTimeout(() => {
+      jump_sound.pause(); // Pausa o som após o tempo definido
+    }, 800); // Ajuste o tempo conforme a duração do pulo
+
+    // Remove a classe de pulo após 800ms e libera o próximo pulo
+    setTimeout(() => {
+      gato.classList.remove("jump");
+      isJumping = false;
+    }, 800);
+  }
+}
 
 const startButton = document.getElementById("start-btn");
 const resultPara = document.getElementById("result");
