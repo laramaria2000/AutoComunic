@@ -122,8 +122,6 @@ let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
 
-letrasColetadas = ["G", "A", "T", "O"]
-
 const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
 
@@ -202,6 +200,12 @@ const recomeçar = () => {
   gameInterval = setInterval(loop, 10);
   gameInterval2 = setInterval(loop, 10); 
 };
+
+const restart = () => {
+  // Recarregar a página para reiniciar o jogo
+  location.reload();
+};
+
 
 const adicionarLetraColetada = (letra) => {
   // Encontre o índice correto para a nova letra
