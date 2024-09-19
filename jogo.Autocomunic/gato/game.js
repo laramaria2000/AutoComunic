@@ -429,6 +429,13 @@ const verificarColisaoLetras = () => {
     ) {
       // Coletar a letra
       letraElemento.style.display = "none"; // Oculta a letra
+          // Reproduz o som do pulo desde o início e pausa ao final
+          collect_sound.currentTime = 0; // Reinicia o som do início
+          collect_sound.play();
+
+          setTimeout(() => {
+            collect_sound.pause(); 
+          }, 800); 
       letrasElementos.splice(index, 1); // Remove da lista
 
       // Mostra a letra coletada no topo
