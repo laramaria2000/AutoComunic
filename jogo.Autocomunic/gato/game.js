@@ -1,6 +1,6 @@
 const startsong = document.getElementById("startsong");
 const music = document.getElementById("trilhaSonora");
-music.volume = 0.2;
+music.volume = 0.04;
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -121,6 +121,8 @@ let letrasElementos = [];
 let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
+
+letrasColetadas = ["G", "A", "T", "O"];
 
 const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
@@ -328,6 +330,14 @@ const loop = () => {
     if (lives >= 0 && !allLettersCollected) {
       allLivesLost = false;
       clearInterval(gameInterval2);
+
+      // Reproduz o som do pulo desde o início e pausa ao final
+      loser_sound.currentTime = 0; // Reinicia o som do início
+      loser_sound.play();
+      
+      setTimeout(() => {
+        loser_sound.pause(); 
+      }, 800); 
       speak(
         `Você tem ${lives} vida${lives === 1 ? "" : "s"} restante${
           lives === 1 ? "" : "s"

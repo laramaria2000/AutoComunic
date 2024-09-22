@@ -199,17 +199,11 @@
   z-index: 999;
 }
 
-
-.vitoria h2 {
-  font-size: 2rem;
-  color: rgb(76, 175, 80);
-  text-align: center;
-}
 .toast {
-  width: 500px; /* Aumenta a largura do toast */
+  width: 700px; /* Aumenta a largura do toast */
+  height: 400px;
   border-radius: 10px; /* Bordas arredondadas */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra para um efeito de profundidade */
-  height: 300px; /* Aumenta a altura do toast */
   opacity: unset;
 }
 
@@ -221,8 +215,8 @@
 
 .toast-body {
   padding: 20px; /* Adiciona padding ao corpo do toast */
-  background-image: url('imagemdotoast.png'); /* Caminho para a imagem de fundo */
-  background-size: 60% 60%; /* Ajusta o tamanho da imagem para 60% da largura e altura do contêiner */
+  background-image: url('img/imagemdotoast.png'); /* Caminho para a imagem de fundo */
+  background-size: 300px 200px; /* Ajusta o tamanho da imagem para 60% da largura e altura do contêiner */
   background-position: top center; /* Posiciona a imagem no topo e centraliza horizontalmente */
   background-repeat: no-repeat; /* Evita que a imagem de fundo se repita */
   
@@ -369,4 +363,14 @@
   background-color: #ebf5ff; /* Cor de fundo do toast */
   border-radius: 10px; /* Arredonda as bordas do toast */
   padding: 0px; /* Espaço interno dentro do toast */
+}
+
+.mic-buttom {
+  margin-top: 85px;
+  padding: 10px;
+}
+
+.imagem-toast{
+  width: 80px;
+  height: 80px;
 }
