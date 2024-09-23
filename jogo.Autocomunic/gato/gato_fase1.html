@@ -35,21 +35,29 @@
 
 
     <div class="toast-container" id="toast-container" style="display: none;">
-      <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 200px; width: 350px">
+      <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 100px; width: 350px;"> 
         <div class="custom-toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
           <div class="toast-header">
-            <img src="img/pause.png" class="rounded mr-2" alt="Pause Icon" style="width: 10%; height: auto;">
-            <strong class="mr-auto">Pause</strong>
+            <img src="img/pause2.png" class="rounded mr-2" alt="Pause Icon" style="width: 60px; height: 60px;">
+            <strong class="mr-auto">Deseja continuar?</strong>
           </div>
-          <div class="toast-pouse text-center">
-            <h4>Deseja continuar?</h4>
-            <br><br><br>
-            <button id="despause-btn" class="btn btn-success">Sim</button>
-            <button id="home-btn" class="btn btn-danger" href="">Não</button>
+          <div class="toast-pouse text-center" style="margin-top: -20px;"> <!-- Ajuste de margem -->
+            <img src="img/novelo.gif" alt="Novelo" style="width: 250px; height: 250px; display: block; margin: 0 auto;">
+            <br>
+            <button id="despause-btn1" class="button-custom" style="background-color: #3e6792; border-radius: 10px; color: aliceblue; margin-top: 10px; width: 100px; height: 50px;">
+              <img src="img/pause.png" alt="Imagem" style="width: 40px; height: 40px;">
+              Sim
+            </button>
+            <button id="despause-btn2" class="button-custom2" style="background-color: #3e6792; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
+              <img src="img/pausex.png" alt="Imagem" style="width: 40px; height: 40px;">
+              Não
+            </button>
           </div>
         </div>
       </div>
-    </div>    
+    </div>
+    
+     
     
 
     <div class="score">0</div>
@@ -69,26 +77,24 @@
   <audio id="collect_sound" src="audio/collect_points.mp3" loop></audio>
   <audio id="loser_sound" src="audio/loser_sound.mp3" loop></audio>
 
-
-
   <div class="game-over">
     <h1>Game Over</h1>
     <button class="reiniciar" onclick="restartGame()">Reiniciar</button>
   </div>
 
   <div class="vitoria" id="vitoria">
-    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 300px; width: 500px">
+    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center">
       <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
         <div class="toast-header">
-          <img src="img/imagemdotoast.png" class="imagem-toast" alt="...">
-          <strong class="mr-auto">Parabéns!</strong>
+          <img src="img/logo1.png" class="imagem-header" alt="...">
+          <strong class="mr-auto"></strong>
         </div>
         <div class="toast-body text-center">
           <br>
           <!-- Botão abaixo do GIF -->
         <br><br><br>
           <button id="start-btn" class="mic-buttom">
-            <img src="img/mic.png" alt="Ícone" style="width: 70px; height: 60px;">
+            <img src="img/mic.png" alt="Ícone" style="width: 60px; height: 50px;">
           </button>
           <p id="result">Você disse:</p>
           <p id="status"></p> 
@@ -96,7 +102,6 @@
       </div>
     </div>
   </div>
-  
   </div>
 
 <script src="game.js"> </script>
