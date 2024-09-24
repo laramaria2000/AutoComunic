@@ -122,7 +122,6 @@ let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
 
-letrasColetadas = ["G", "A", "T", "O"]
 
 const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
@@ -354,7 +353,7 @@ const loop = () => {
     } else {
       gameOver.querySelector(
         "h1"
-      ).textContent = `Você tem ${lives} vidas restantes.`;
+      ).textContent = `Você tem ${lives} vidas restantes`;
     }
   } else if (pipePosition < 0 && !pipe.classList.contains("scored")) {
     pipe.classList.add("scored");

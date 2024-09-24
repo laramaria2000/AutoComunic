@@ -213,14 +213,24 @@
   color: white; /* Cor do texto no cabeçalho */
   border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
   height: 70px;
+  width: 300px;
+}
+
+.toast-header2 {
+  background-color: #34567b;
+  color: white; /* Cor do texto no cabeçalho */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
+  height: 70px;
 }
 
 .imagem-header {
   background-color: #34567b;
   color: white; /* Cor do texto no cabeçalho */
   border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
-  width: 85px;
+  width: 90px;
   height: 60px;
+  margin-top: 5px;
+  margin-left: 8px;
 }
 
 .toast-body {
@@ -230,8 +240,6 @@
   background-position: top center; 
   background-repeat: no-repeat; 
 }
-
-
 
 
 .start {
@@ -357,16 +365,18 @@
   z-index: 1000; /* Para garantir que o toast apareça sobre outros elementos */
 }
 
-.toast-container h2 {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #1a3755;
-}
+
 
 .custom-toast {
-  background-color: #ebf5ff; /* Cor de fundo do toast */
+  background-color: #d1dce8; /* Cor de fundo do toast */
   border-radius: 10px; /* Arredonda as bordas do toast */
   padding: 0px; /* Espaço interno dentro do toast */
+  height: 300px;
+  width: 300px;
+}
+
+.toast-pouse{
+  margin-top: -10px;
 }
 
 .mic-buttom {
