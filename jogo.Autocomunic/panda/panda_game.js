@@ -122,12 +122,13 @@ let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
 
+letrasColetadas = ["P", "A", "N", "D", "AA"];
 const letras = ["P", "A", "N", "D", "AA"];
 let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
 
-const resetarpanda = () => {
+const resetarpanda = () => { 
   panda.src = "img.panda/panda.gif";
   panda.style.width = "150px";
   panda.style.bottom = "0";

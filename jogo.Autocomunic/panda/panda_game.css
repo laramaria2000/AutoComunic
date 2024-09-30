@@ -69,17 +69,18 @@
   
   .pipe {
     position: absolute;
-    bottom: 0;
+    bottom: 45px;
     right: -80px;
     width: 100px;
     height: 100px;
   }
   
   .panda {
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
     position: absolute;
-    bottom: 0;
+    bottom: 45px;
+
   }
   
   .background-video {
@@ -108,16 +109,7 @@
     width: 30px;
     height: 30px;
   }
-  
-  @keyframes clouds-animation {
-    from {
-      right: -550px;
-    }
-    to {
-      right: 100%;
-    }
-  }
-  
+ 
   .pipe-animation {
     animation: pipe-animation 1.5s infinite linear;
   }
@@ -137,7 +129,7 @@
   
   @keyframes jump {
     0% {
-      bottom: 0;
+      bottom: 45px;
     }
     40% {
       bottom: 200px;
@@ -149,7 +141,7 @@
       bottom: 200px;
     }
     100% {
-      bottom: 0;
+      bottom: 45px;
     }
   }
   
@@ -161,7 +153,7 @@
   }
   
   .letra-animacao {
-    animation: letra-animation 2s linear;
+    animation: letra-animation 1.5s linear;
   }
   
   @keyframes letra-animation {
