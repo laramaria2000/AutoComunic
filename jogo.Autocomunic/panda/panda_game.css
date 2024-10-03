@@ -71,8 +71,8 @@
     position: absolute;
     bottom: 45px;
     right: -80px;
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
   }
   
   .panda {
@@ -209,7 +209,7 @@
   }
   
   .toast-header2 {
-    background-color: #d36411;
+    background-color: #d67124;
     color: white; /* Cor do texto no cabeçalho */
     border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
     height: 70px;
@@ -217,6 +217,16 @@
   
   .imagem-header {
     background-color: #d36411;
+    color: white; /* Cor do texto no cabeçalho */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
+    width: 90px;
+    height: 60px;
+    margin-top: 5px;
+    margin-left: 8px;
+  }
+
+  .imagem-header2 {
+    background-color: #d67124;
     color: white; /* Cor do texto no cabeçalho */
     border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
     width: 90px;
