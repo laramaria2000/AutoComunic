@@ -111,7 +111,7 @@
   }
  
   .pipe-animation {
-    animation: pipe-animation 1.5s infinite linear;
+    animation: pipe-animation 1.8s infinite linear;
   }
   
   @keyframes pipe-animation {
@@ -153,7 +153,7 @@
   }
   
   .letra-animacao {
-    animation: letra-animation 1.5s linear;
+    animation: letra-animation 1.8s linear;
   }
   
   @keyframes letra-animation {

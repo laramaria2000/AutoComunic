@@ -7,49 +7,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <link rel="stylesheet" href="panda_game.css">
-  <title>Fase 2</title>
+  <link rel="stylesheet" href="pinguim_game.css">
+  <title>Fase 3</title>
 
 </head>
 <body>
   <div class="game">
     <div class="game">
       <video class="background-video" autoplay muted loop>
-        <source src="img.panda/cenario_capivara.mp4" type="video/mp4">
+        <source src="img.pinguim/cenario_pinguim.mp4" type="video/mp4">
         Seu navegador não suporta o vídeo.
       </video>
  
     <div class="buttons-container">
       <button class="round-button3" onclick="restart()">
-        <img src="img.panda/retomar.png" alt="retomar">
+        <img src="img.pinguim/retomar.png" alt="retomar">
       </button>  
       <button id="pause-btn" class="round-button1">
-        <img src="img.panda/pause.png" alt="pause">
+        <img src="img.pinguim/pause.png" alt="pause">
       </button>
       <button class="round-button2">
-        <img src="img.panda/inicial.png" alt="inicial">
+        <img src="img.pinguim/inicial.png" alt="inicial">
       </button>    
     </div>
-    <img class="panda" src="img.panda/panda.gif" alt="panda">
-    <img class="pipe" src="img.panda/pedra.png" alt="pedra">
+    <img class="pinguim" src="img.pinguim/pinguim.gif" alt="pinguim">
+    <img class="pipe" src="img.pinguim/gelo.png" alt="gelo">
 
 
     <div class="toast-container" id="toast-container" style="display: none;">
       <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="height: 90px; width: 350px;"> 
         <div class="custom-toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
           <div class="toast-header">
-            <img src="img.panda/pause2.png" class="rounded mr-2" alt="Pause Icon" style="width: 60px; height: 60px;">
+            <img src="img.pinguim/pause2.png" class="rounded mr-2" alt="Pause Icon" style="width: 60px; height: 60px;">
             <strong class="mr-auto">Deseja continuar?</strong>
           </div>
           <div class="toast-pouse text-center"> <!-- Ajuste de margem -->
-            <img src="img.panda/panda.gif" alt="Novelo" style="width: 120px; height: 120px; display: block; margin: 0 auto;">
+            <img src="img.pinguim/pinguim.gif" alt="Novelo" style="width: 120px; height: 120px; display: block; margin: 0 auto;">
               <br>
-            <button id="despause-btn" class="button-custom" style="background-color: #f5b483; border-radius: 10px; color: aliceblue; margin-top: 10px; width: 100px; height: 50px;">
-              <img src="img.panda/pause.png" alt="Imagem" style="width: 40px; height: 40px;">
+            <button id="despause-btn" class="button-custom" style="background-color: #71b7db; border-radius: 10px; color: aliceblue; margin-top: 10px; width: 100px; height: 50px;">
+              <img src="img.pinguim/pause.png" alt="Imagem" style="width: 40px; height: 40px;">
               Sim
             </button>
-            <button id="despause-btn2" class="button-custom2" href="" style="background-color: #f5b483; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
-              <img src="img.panda/pausex.png" alt="Imagem" style="width: 40px; height: 40px;">
+            <button id="despause-btn2" class="button-custom2" href="" style="background-color: #71b7db; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
+              <img src="img.pinguim/pausex.png" alt="Imagem" style="width: 40px; height: 40px;">
               Não
             </button>
           </div>
@@ -62,9 +62,9 @@
 
     <div class="score">0</div>
     <div class="lives">
-      <img src="img.panda/cori1.png" alt="vida">
-      <img src="img.panda/cori1.png" alt="vida">
-      <img src="img.panda/cori1.png" alt="vida">
+      <img src="img.pinguim/cori1.png" alt="vida">
+      <img src="img.pinguim/cori1.png" alt="vida">
+      <img src="img.pinguim/cori1.png" alt="vida">
     </div>
 
 
@@ -72,14 +72,14 @@
     <button id="startsong" class="start" onclick="startGame()">Iniciar</button>
   </div>
 
-  <audio id="trilhaSonora" src="audio.panda/trilhasonora.mp3" loop></audio>
-  <audio id="jump_sound" src="audio.panda/junp_sound.mp3" loop></audio>
-  <audio id="collect_sound" src="audio.panda/collect_points.mp3" loop></audio>
-  <audio id="loser_sound" src="audio.panda/loser_sound.mp3" loop></audio>
+  <audio id="trilhaSonora" src="audio.pinguim/trilhasonora.mp3" loop></audio>
+  <audio id="jump_sound" src="audio.pinguim/junp_sound.mp3" loop></audio>
+  <audio id="collect_sound" src="audio.pinguim/collect_points.mp3" loop></audio>
+  <audio id="loser_sound" src="audio.pinguim/loser_sound.mp3" loop></audio>
 
   <div class="game-over">
     <h1 style="text-align: center;margin-bottom: -20px;">Game Over</h1>
-    <img src="img.panda/panda.gif" alt="Imagem de game over" style="width: 100px; height: 100px;" />
+    <img src="img.pinguim/pinguim.gif" alt="Imagem de game over" style="width: 100px; height: 100px;" />
     <button class="reiniciar" onclick="restartGame()">Reiniciar</button>  
   </div>
 
@@ -88,7 +88,7 @@
     <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center">
       <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
         <div class="toast-header2">
-          <img src="img.panda//logo1.png" class="imagem-header" alt="...">
+          <img src="img.pinguim//logo1.png" class="imagem-header" alt="...">
           <strong class="mr-auto"></strong>
         </div>
         <div class="toast-body text-center">
@@ -96,7 +96,7 @@
           <!-- Botão abaixo do GIF -->
         <br><br><br>
           <button id="start-btn" class="mic-buttom">
-            <img src="img.panda/mic.png" alt="Ícone" style="width: 60px; height: 50px;">
+            <img src="img.pinguim/mic.png" alt="Ícone" style="width: 60px; height: 50px;">
           </button>
           <p id="result">Você disse:</p>
           <p id="status"></p> 
@@ -106,7 +106,7 @@
   </div>
   </div>
 
-<script src="panda_game.js"> </script>
+<script src="pinguim_game.js"> </script>
   
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

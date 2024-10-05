@@ -33,12 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function pauseAnimation() {
     pipe.style.animationPlayState = "paused";
-    panda.style.animationPlayState = "paused";
+    pinguim.style.animationPlayState = "paused";
   }
 
   function resumeAnimation() {
     pipe.style.animationPlayState = "running";
-    panda.style.animationPlayState = "running";
+    pinguim.style.animationPlayState = "running";
   }
 
   pauseButton.addEventListener("click", () => {
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 });
 
-const panda = document.querySelector(".panda");
+const pinguim = document.querySelector(".pinguim");
 const pipe = document.querySelector(".pipe");
 const start = document.querySelector(".start");
 const gameOver = document.querySelector(".game-over");
@@ -122,22 +122,21 @@ let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
 
-letrasColetadas = ["P", "A", "N", "D", "AA"];
-const letras = ["P", "A", "N", "D", "AA"];
+const letras = ["P", "I", "N", "G", "U", "II", "M"];
 let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
 
-const resetarpanda = () => { 
-  panda.src = "img.panda/panda.gif";
-  panda.style.width = "150px";
-  panda.style.bottom = "0";
-  panda.style.marginLeft = "0";
+const resetarpinguim = () => { 
+  pinguim.src = "img.pinguim/pinguim.gif";
+  pinguim.style.width = "150px";
+  pinguim.style.bottom = "0";
+  pinguim.style.marginLeft = "0";
 };
 
 const resetarpedra = () => {
   pipe.classList.remove("pipe-animation");
-  pipe.offsetWidth; // Trigger reflow
+  pipe.offsetWidth; 
   pipe.classList.add("pipe-animation");
   pipe.style.right = "-80px";
 };
@@ -158,7 +157,7 @@ const restartGame = () => {
   falou_reiniciar = false;
   gameOver.style.display = "none";
 
-  resetarpanda();
+  resetarpinguim();
 
   resetarpedra();
 
@@ -182,7 +181,7 @@ const recomeçar = () => {
   falou_reiniciar = false;
   gameOver.style.display = "none";
 
-  resetarpanda();
+  resetarpinguim();
 
   resetarpedra();
 
@@ -224,7 +223,7 @@ const atualizarLetrasColetadas = () => {
   letrasColetadas.forEach((letra) => {
     if (letra) {
       const letraColetada = document.createElement("img");
-      letraColetada.src = `img.panda/letra${letra}.png`;
+      letraColetada.src = `img.pinguim/letra${letra}.png`;
       letraColetada.alt = letra;
       letraColetada.classList.add("letra-coletada");
       letrasColetadasDisplay.appendChild(letraColetada);
@@ -235,13 +234,13 @@ const atualizarLetrasColetadas = () => {
 const verificarColisaoLetras2 = () => {
   letrasElementos.forEach((letraElemento, index) => {
     const letraPosition = letraElemento.getBoundingClientRect();
-    const pandaPosition = panda.getBoundingClientRect();
+    const pinguimPosition = pinguim.getBoundingClientRect();
 
     if (
-      letraPosition.left < pandaPosition.right &&
-      letraPosition.right > pandaPosition.left &&
-      letraPosition.top < pandaPosition.bottom &&
-      letraPosition.bottom > pandaPosition.top
+      letraPosition.left < pinguimPosition.right &&
+      letraPosition.right > pinguimPosition.left &&
+      letraPosition.top < pinguimPosition.bottom &&
+      letraPosition.bottom > pinguimPosition.top
     ) {
       // Coletar a letra
       letraElemento.style.display = "none"; // Oculta a letra
@@ -261,7 +260,7 @@ const verificarColisaoLetras2 = () => {
 const criarletra2 = (pipePosition) => {
   const letra = letras[proximaLetra];
   const letraElemento = document.createElement("img");
-  letraElemento.src = `img.panda/letra${letra}.png`;
+  letraElemento.src = `img.pinguim/letra${letra}.png`;
   letraElemento.alt = letra;
   letraElemento.classList.add("letra", "letra-animacao");
   letraElemento.style.bottom = "200px"; // Ajuste conforme necessário para a posição acima da pedra
@@ -288,7 +287,7 @@ const updateLives = () => {
   livesDisplay.innerHTML = "";
   for (let i = 0; i < lives; i++) {
     const img = document.createElement("img");
-    img.src = "img.panda/cori1.png";
+    img.src = "img.pinguim/cori1.png";
     img.alt = "vida";
     livesDisplay.appendChild(img);
   }
@@ -296,24 +295,24 @@ const updateLives = () => {
 
 const loop = () => {
   const pipePosition = pipe.offsetLeft;
-  const pandaPosition = parseInt(
-    window.getComputedStyle(panda).bottom.replace("px", "")
+  const pinguimPosition = parseInt(
+    window.getComputedStyle(pinguim).bottom.replace("px", "")
   );
 
   if (
     pipePosition <= 120 &&
     pipePosition > 0 &&
-    pandaPosition < 80 &&
+    pinguimPosition < 80 &&
     !ignoreCollision
   ) {
     pipe.classList.remove("pipe-animation");
 
-    panda.classList.remove("jump");
-    panda.style.bottom = `${pandaPosition}px`;
+    pinguim.classList.remove("jump");
+    pinguim.style.bottom = `${pinguimPosition}px`;
 
-    panda.src = "./src/img/game-over.png";
-    panda.style.width = "10px";
-    panda.style.marginLeft = "50px";
+    pinguim.src = "./src/img/game-over.png";
+    pinguim.style.width = "10px";
+    pinguim.style.marginLeft = "50px";
 
     gameOver.style.display = "flex";
     lives--;
@@ -369,16 +368,16 @@ const loop = () => {
 
   verificarColisaoLetras();
 
-  if (verificarPalavrapanda()) {
+  if (verificarPalavrapinguim()) {
     clearInterval(gameInterval);
     vitoriaDisplay.style.display = "block";
     pipe.classList.remove("pipe-animation");
 
-    panda.classList.remove("jump");
-    resetarpanda();
+    pinguim.classList.remove("jump");
+    resetarpinguim();
     if (!falou_reiniciar) {
       speak(
-        "Clique no botão para reiniciar o reconhecimento de voz. Repita a palavra...panda"
+        "Clique no botão para reiniciar o reconhecimento de voz. Repita a palavra...pinguim"
       );
       falou_reiniciar = true;
     }
@@ -386,7 +385,7 @@ const loop = () => {
 };
 
 // Função para verificar se todas as 5 letras foram coletadas
-const verificarPalavrapanda = () => {
+const verificarPalavrapinguim = () => {
   for (let i = 0; i < letras.length; i++) {
     if (!letrasColetadas.includes(letras[i])) {
       return false;
@@ -399,7 +398,7 @@ const verificarPalavrapanda = () => {
 const criarLetra = (pipePosition) => {
   const letra = letras[proximaLetra];
   const letraElemento = document.createElement("img");
-  letraElemento.src = `img.panda/letra${letra}.png`;
+  letraElemento.src = `img.pinguim/letra${letra}.png`;
   letraElemento.alt = letra;
   letraElemento.classList.add("letra", "letra-animacao");
   letraElemento.style.bottom = "200px"; // Ajuste conforme necessário para a posição acima do pedra
@@ -421,7 +420,7 @@ const criarLetra = (pipePosition) => {
 const criarLetrasColetadas = () => {
   letrasColetadas.forEach((letra) => {
     const letraColetada = document.createElement("img");
-    letraColetada.src = `img.panda/letra${letra}.png`;
+    letraColetada.src = `img.pinguim/letra${letra}.png`;
     letraColetada.alt = letra;
     letraColetada.classList.add("letra-coletada");
     letrasColetadasDisplay.appendChild(letraColetada);
@@ -431,13 +430,13 @@ const criarLetrasColetadas = () => {
 const verificarColisaoLetras = () => {
   letrasElementos.forEach((letraElemento, index) => {
     const letraPosition = letraElemento.getBoundingClientRect();
-    const pandaPosition = panda.getBoundingClientRect();
+    const pinguimPosition = pinguim.getBoundingClientRect();
 
     if (
-      letraPosition.left < pandaPosition.right &&
-      letraPosition.right > pandaPosition.left &&
-      letraPosition.top < pandaPosition.bottom &&
-      letraPosition.bottom > pandaPosition.top
+      letraPosition.left < pinguimPosition.right &&
+      letraPosition.right > pinguimPosition.left &&
+      letraPosition.top < pinguimPosition.bottom &&
+      letraPosition.bottom > pinguimPosition.top
     ) {
       // Coletar a letra
       letraElemento.style.display = "none"; // Oculta a letra
@@ -463,7 +462,7 @@ const verificarColisaoLetras = () => {
       updateScore();
 
       // Verifica se todas as letras "P", "A", "N", "D", "A" foram coletadas
-      if (verificarPalavrapanda()) {
+      if (verificarPalavrapinguim()) {
         // Código para quando todas as letras forem coletadas
         console.log("Você coletou todas as letras!");
         // Exibir uma mensagem ou avançar para o próximo nível, etc.
@@ -506,7 +505,7 @@ let isJumping = false; // controla o estado do pulo
 function jump() {
   if (!isJumping) {
     isJumping = true;
-    panda.classList.add("jump");
+    pinguim.classList.add("jump");
 
     // Reproduz o som do pulo desde o início e pausa ao final
     jump_sound.currentTime = 0; // Reinicia o som do início
@@ -517,7 +516,7 @@ function jump() {
     }, 800); 
 
     setTimeout(() => {
-      panda.classList.remove("jump");
+      pinguim.classList.remove("jump");
       isJumping = false;
     }, 800);
   }
@@ -527,7 +526,7 @@ const startButton = document.getElementById("start-btn");
 const resultPara = document.getElementById("result");
 const statusPara = document.getElementById("status");
 
-const expectedWord = "panda";
+const expectedWord = "pinguim";
 
 // Verifica se o navegador suporta a API de reconhecimento de voz
 if ("webkitSpeechRecognition" in window) {
