@@ -16,7 +16,7 @@
   }
   
   .const restartGame {
-    background: #d36411;
+    background: #835f52;
     color: rgb(255, 255, 255);
     font-weight: bold;
     font-size: 1.5rem;
@@ -34,7 +34,7 @@
     margin-bottom: 250px;
     width: 120px;
     height: 60px;
-    background: #fec89e; /* Cor do fundo */
+    background: #ebc3b5; /* Cor do fundo */
     color: white; /* Cor do texto do botão */
     border: none;
     border-radius: 10px; /* Borda mais arredondada */
@@ -44,13 +44,13 @@
   }
   
   .reiniciar:hover {
-    color: #fc9e57;
+    color: #917469;
   }
   
   .game-over {
     width: 100%;
     height: 100vh;
-    background: #d36411;
+    background: #835f52;
     display: none;
     align-items: center;
     justify-content: center;
@@ -62,7 +62,7 @@
   .game-over h1 {
     font-size: 3rem;
     font-family: Cambria, Cochin, Georgia, serif;
-    color: #fec89e;
+    color: #ebc3b5;
     text-align: center;
     margin-top: 15rem;
   }
@@ -75,7 +75,7 @@
     height: 200px;
   }
   
-  .panda {
+  .capivara {
     width: 170px;
     height: 170px;
     position: absolute;
@@ -111,7 +111,7 @@
   }
  
   .pipe-animation {
-    animation: pipe-animation 1.8s infinite linear;
+    animation: pipe-animation 1.4s infinite linear;
   }
   
   @keyframes pipe-animation {
@@ -153,7 +153,7 @@
   }
   
   .letra-animacao {
-    animation: letra-animation 1.8s linear;
+    animation: letra-animation 1.4s linear;
   }
   
   @keyframes letra-animation {
@@ -201,7 +201,7 @@
   }
   
   .toast-header {
-    background-color: #d36411;
+    background-color: #835f52;
     color: white; /* Cor do texto no cabeçalho */
     border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
     height: 70px;
@@ -209,14 +209,14 @@
   }
   
   .toast-header2 {
-    background-color: #d67124;
+    background-color: #835f52;
     color: white; /* Cor do texto no cabeçalho */
     border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
     height: 70px;
   }
   
   .imagem-header {
-    background-color: #d36411;
+    background-color: #835f52;
     color: white; /* Cor do texto no cabeçalho */
     border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
     width: 90px;
@@ -226,7 +226,7 @@
   }
 
   .imagem-header2 {
-    background-color: #d67124;
+    background-color: #835f52;
     color: white; /* Cor do texto no cabeçalho */
     border-bottom: 1px solid rgba(0, 0, 0, 0.125); /* Adiciona uma linha de separação */
     width: 90px;
@@ -237,7 +237,7 @@
   
   .toast-body {
     padding: 35px; 
-    background-image: url('img.panda/imagemdotoast.png'); 
+    background-image: url('img.capivara/imagemdotoast.png'); 
     background-size: 300px 200px; 
     background-position: top center; 
     background-repeat: no-repeat; 
@@ -250,7 +250,7 @@
     margin-right: auto;
     width: 15vw; /* Largura relativa ao tamanho da viewport */
     height: auto; /* Ajusta a altura automaticamente */
-    background: #d36411;
+    background: #835f52;
     color: white;
     border: none;
     border-radius: 10px;
@@ -279,7 +279,7 @@
   }
   
   .start:hover {
-    background: #fc9e57; /* Cor de fundo ao passar o mouse */
+    background: #8a685c; /* Cor de fundo ao passar o mouse */
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Sombra maior no hover */
     opacity: 1; /* Garante que a opacidade seja 100% no hover */
   }
@@ -299,7 +299,7 @@
     margin-top: -45px;
     border-radius: 50%;
     border: none;
-    background-color: #f5b483;
+    background-color: #ebc3b5;
     color: white;
     display: flex;
     align-items: center;
@@ -320,7 +320,7 @@
     margin-right: -35px;
     border-radius: 50%;
     border: none;
-    background-color:#f5b483;
+    background-color:#ebc3b5;
     color: white;
     font-size: 1.5rem;
     display: flex;
@@ -341,7 +341,7 @@
     margin-right: -1px;
     border-radius: 50%;
     border: none;
-    background-color: #f5b483;
+    background-color: #ebc3b5;
     color: white;
     font-size: 1.5rem;
     display: flex;
@@ -368,7 +368,7 @@
   }
   
   .custom-toast {
-    background-color: #ffe3ce; /* Cor de fundo do toast */
+    background-color: #ebc3b5; /* Cor de fundo do toast */
     border-radius: 10px; /* Arredonda as bordas do toast */
     padding: 0px; /* Espaço interno dentro do toast */
     height: 300px;
@@ -383,7 +383,7 @@
     margin-top: 85px;
     padding: 3px;
     border-radius: 10px;
-    background-color: #f5d7c0;
+    background-color: #ebc3b5;
   }
   
   .imagem-toast{

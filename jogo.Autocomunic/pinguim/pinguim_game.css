@@ -289,7 +289,7 @@
     margin-top: -45px;
     border-radius: 50%;
     border: none;
-    background-color: #c2ebff;
+    background-color: #225d7a;
     color: white;
     display: flex;
     align-items: center;
@@ -310,7 +310,7 @@
     margin-right: -35px;
     border-radius: 50%;
     border: none;
-    background-color:#c2ebff;
+    background-color:#225d7a;
     color: white;
     font-size: 1.5rem;
     display: flex;
@@ -331,7 +331,7 @@
     margin-right: -1px;
     border-radius: 50%;
     border: none;
-    background-color: #c2ebff;
+    background-color: #225d7a;
     color: white;
     font-size: 1.5rem;
     display: flex;
@@ -373,7 +373,7 @@
     margin-top: 85px;
     padding: 3px;
     border-radius: 10px;
-    background-color: #c2ebff;
+    background-color: #61a5c7;
   }
   
   .imagem-toast{
