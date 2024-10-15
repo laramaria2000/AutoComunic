@@ -122,7 +122,7 @@ let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
 
-
+letrasColetadas = ["G", "A", "T", "O"];
 const letras = ["G", "A", "T", "O"];
 let proximaLetra = 0;
 
@@ -555,6 +555,8 @@ if ("webkitSpeechRecognition" in window) {
     // Verifica se a última palavra dita foi a correta e fala a mensagem
     if (resultPara.textContent.includes(expectedWord)) {
       speak("Parabéns! Você passou de fase!");
+      window.location.href = 'panda_fase2.html';
+    
     } else {
       speak("Tente novamente!");
       console.log("Palavra incorreta reconhecida.");
