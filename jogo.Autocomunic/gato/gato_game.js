@@ -552,10 +552,9 @@ if ("webkitSpeechRecognition" in window) {
 
   recognition.onend = () => {
     console.log();
-    // Verifica se a última palavra dita foi a correta e fala a mensagem
     if (resultPara.textContent.includes(expectedWord)) {
       speak("Parabéns! Você passou de fase!");
-      window.location.href = 'panda_fase2.html';
+      window.location.href = 'http://127.0.0.1:5501/jogo.Autocomunic/panda/panda_fase2.html';
     
     } else {
       speak("Tente novamente!");

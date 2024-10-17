@@ -565,6 +565,8 @@ if ("webkitSpeechRecognition" in window) {
     // Verifica se a última palavra dita foi a correta e fala a mensagem
     if (resultPara.textContent.includes(expectedWord)) {
       speak("Parabéns! Você passou de fase!");
+      window.location.href = 'http://127.0.0.1:5501/jogo.Autocomunic/capivara/capivara_fase4.htmll';
+
     } else {
       speak("Tente novamente!");
       console.log("Palavra incorreta reconhecida.");
