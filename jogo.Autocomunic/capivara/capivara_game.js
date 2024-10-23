@@ -462,20 +462,16 @@ const verificarColisaoLetras = () => {
       score += 10;
       updateScore();
 
-      // Verifica se todas as letras "P", "A", "N", "D", "A" foram coletadas
       if (verificarPalavracapivara()) {
-        // Código para quando todas as letras forem coletadas
         console.log("Você coletou todas as letras!");
-        // Exibir uma mensagem ou avançar para o próximo nível, etc.
       }
     } else if (letraPosition.right < 0) {
-      // Reposiciona a letra ao lado direito da tela
-      letraElemento.style.right = "-80px"; // Ajuste conforme necessário para reposicionar a letra
+      letraElemento.style.right = "-80px"; 
     }
   });
 };
 
-let lastClickTime = 0; // Para rastrear o tempo do último clique
+let lastClickTime = 0; 
 
 document.addEventListener("keypress", (e) => {
   const tecla = e.key;
@@ -495,21 +491,19 @@ document.addEventListener("touchstart", (e) => {
 document.addEventListener("dblclick", (e) => {
   const currentTime = new Date().getTime();
   if (currentTime - lastClickTime < 5) {
-    // Considera 300 ms como intervalo para duplo clique
     jump();
   }
   lastClickTime = currentTime;
 });
 
-let isJumping = false; // controla o estado do pulo
+let isJumping = false; 
 
 function jump() {
   if (!isJumping) {
     isJumping = true;
     capivara.classList.add("jump");
 
-    // Reproduz o som do pulo desde o início e pausa ao final
-    jump_sound.currentTime = 0; // Reinicia o som do início
+    jump_sound.currentTime = 0; 
     jump_sound.play();
 
     setTimeout(() => {
@@ -529,7 +523,6 @@ const statusPara = document.getElementById("status");
 
 const expectedWord = "capivara";
 
-// Verifica se o navegador suporta a API de reconhecimento de voz
 if ("webkitSpeechRecognition" in window) {
   const recognition = new webkitSpeechRecognition();
   recognition.lang = "pt-BR";
@@ -562,9 +555,71 @@ if ("webkitSpeechRecognition" in window) {
 
   recognition.onend = () => {
     console.log();
-    // Verifica se a última palavra dita foi a correta e fala a mensagem
+
     if (resultPara.textContent.includes(expectedWord)) {
-      speak("Parabéns! Você passou de fase!");
+      speak("Parabéns! Você comcluiu todas as fases");
+      const canvas = document.getElementById('confettiCanvas');
+      const ctx = canvas.getContext('2d');
+
+      // Ajusta o tamanho do canvas
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Função para redimensionar o canvas quando a janela for redimensionada
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      // Criação dos confetes
+      const confetti = [];
+      const colors = ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd'];
+
+      function ConfettiPiece() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height - canvas.height;
+        this.size = Math.random() * 10 + 5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.speed = Math.random() * 3 + 1;
+        this.angle = Math.random() * 360;
+        this.rotationSpeed = Math.random() * 10 - 5;
+
+        this.update = function () {
+          this.y += this.speed;
+          this.angle += this.rotationSpeed;
+          if (this.y > canvas.height) {
+            this.y = -10;
+            this.x = Math.random() * canvas.width;
+          }
+        };
+
+        this.draw = function () {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate((this.angle * Math.PI) / 180);
+          ctx.fillStyle = this.color;
+          ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+          ctx.restore();
+        };
+      }
+
+      function createConfetti() {
+        for (let i = 0; i < 150; i++) {
+          confetti.push(new ConfettiPiece());
+        }
+      }
+
+      function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach((confetto) => {
+          confetto.update();
+          confetto.draw();
+        });
+        requestAnimationFrame(animateConfetti);
+      }
+
+      createConfetti();
+      animateConfetti();
     } else {
       speak("Tente novamente!");
       console.log("Palavra incorreta reconhecida.");
