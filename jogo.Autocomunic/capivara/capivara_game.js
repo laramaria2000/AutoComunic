@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let gameLoopInterval;
 
   const startGameLoop = () => {
-    gameLoopInterval = setInterval(gameLoop, 1000 / 60); // 60 FPS
+    gameLoopInterval = setInterval(gameLoop, 1000 / 60);
   };
 
   const pauseGame = () => {
