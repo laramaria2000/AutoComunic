@@ -2,13 +2,11 @@ const startsong = document.getElementById("startsong");
 const music = document.getElementById("trilhaSonora");
 music.volume = 0.04;
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const pauseButton = document.getElementById("pause-btn");
   const despauseButton = document.getElementById("despause-btn");
   const reco = document.getElementById("round-button3");
   const toastContainer = document.getElementById("toast-container");
-
 
   let isGamePaused = false;
   let gameLoopInterval;
@@ -128,7 +126,7 @@ let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
 
-const resetarcapivara = () => { 
+const resetarcapivara = () => {
   capivara.src = "img.capivara/capivara.gif";
   capivara.style.width = "150px";
   capivara.style.bottom = "0";
@@ -199,14 +197,13 @@ const recomeçar = () => {
   updateLives();
 
   gameInterval = setInterval(loop, 10);
-  gameInterval2 = setInterval(loop, 10); 
+  gameInterval2 = setInterval(loop, 10);
 };
 
 const restart = () => {
   // Recarregar a página para reiniciar o jogo
   location.reload();
 };
-
 
 const adicionarLetraColetada = (letra) => {
   // Encontre o índice correto para a nova letra
@@ -279,7 +276,6 @@ const criarletra2 = (pipePosition) => {
   proximaLetra = (proximaLetra + 1) % letras.length;
 };
 
-
 const updateScore = () => {
   scoreDisplay.textContent = score;
 };
@@ -333,10 +329,10 @@ const loop = () => {
       // Reproduz o som do pulo desde o início e pausa ao final
       loser_sound.currentTime = 0; // Reinicia o som do início
       loser_sound.play();
-      
+
       setTimeout(() => {
-        loser_sound.pause(); 
-      }, 800); 
+        loser_sound.pause();
+      }, 800);
       speak(
         `Você tem ${lives} vida${lives === 1 ? "" : "s"} restante${
           lives === 1 ? "" : "s"
@@ -441,13 +437,13 @@ const verificarColisaoLetras = () => {
     ) {
       // Coletar a letra
       letraElemento.style.display = "none"; // Oculta a letra
-          // Reproduz o som do pulo desde o início e pausa ao final
-          collect_sound.currentTime = 0; // Reinicia o som do início
-          collect_sound.play();
+      // Reproduz o som do pulo desde o início e pausa ao final
+      collect_sound.currentTime = 0; // Reinicia o som do início
+      collect_sound.play();
 
-          setTimeout(() => {
-            collect_sound.pause(); 
-          }, 800); 
+      setTimeout(() => {
+        collect_sound.pause();
+      }, 800);
       letrasElementos.splice(index, 1); // Remove da lista
 
       // Mostra a letra coletada no topo
@@ -466,12 +462,12 @@ const verificarColisaoLetras = () => {
         console.log("Você coletou todas as letras!");
       }
     } else if (letraPosition.right < 0) {
-      letraElemento.style.right = "-80px"; 
+      letraElemento.style.right = "-80px";
     }
   });
 };
 
-let lastClickTime = 0; 
+let lastClickTime = 0;
 
 document.addEventListener("keypress", (e) => {
   const tecla = e.key;
@@ -496,19 +492,19 @@ document.addEventListener("dblclick", (e) => {
   lastClickTime = currentTime;
 });
 
-let isJumping = false; 
+let isJumping = false;
 
 function jump() {
   if (!isJumping) {
     isJumping = true;
     capivara.classList.add("jump");
 
-    jump_sound.currentTime = 0; 
+    jump_sound.currentTime = 0;
     jump_sound.play();
 
     setTimeout(() => {
-      jump_sound.pause(); 
-    }, 800); 
+      jump_sound.pause();
+    }, 800);
 
     setTimeout(() => {
       capivara.classList.remove("jump");
@@ -558,22 +554,22 @@ if ("webkitSpeechRecognition" in window) {
 
     if (resultPara.textContent.includes(expectedWord)) {
       speak("Parabéns! Você comcluiu todas as fases");
-      const canvas = document.getElementById('confettiCanvas');
-      const ctx = canvas.getContext('2d');
+      const canvas = document.getElementById("confettiCanvas");
+      const ctx = canvas.getContext("2d");
 
       // Ajusta o tamanho do canvas
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
       // Função para redimensionar o canvas quando a janela for redimensionada
-      window.addEventListener('resize', () => {
+      window.addEventListener("resize", () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       });
 
       // Criação dos confetes
       const confetti = [];
-      const colors = ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd'];
+      const colors = ["#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd"];
 
       function ConfettiPiece() {
         this.x = Math.random() * canvas.width;

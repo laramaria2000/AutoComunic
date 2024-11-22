@@ -2,13 +2,11 @@ const startsong = document.getElementById("startsong");
 const music = document.getElementById("trilhaSonora");
 music.volume = 0.04;
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const pauseButton = document.getElementById("pause-btn");
   const despauseButton = document.getElementById("despause-btn");
   const reco = document.getElementById("round-button3");
   const toastContainer = document.getElementById("toast-container");
-
 
   let isGamePaused = false;
   let gameLoopInterval;
@@ -128,7 +126,7 @@ let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
 
-const resetarpinguim = () => { 
+const resetarpinguim = () => {
   pinguim.src = "img.pinguim/pinguim.gif";
   pinguim.style.width = "150px";
   pinguim.style.bottom = "0";
@@ -137,7 +135,7 @@ const resetarpinguim = () => {
 
 const resetarpedra = () => {
   pipe.classList.remove("pipe-animation");
-  pipe.offsetWidth; 
+  pipe.offsetWidth;
   pipe.classList.add("pipe-animation");
   pipe.style.right = "-80px";
 };
@@ -199,14 +197,13 @@ const recomeçar = () => {
   updateLives();
 
   gameInterval = setInterval(loop, 10);
-  gameInterval2 = setInterval(loop, 10); 
+  gameInterval2 = setInterval(loop, 10);
 };
 
 const restart = () => {
   // Recarregar a página para reiniciar o jogo
   location.reload();
 };
-
 
 const adicionarLetraColetada = (letra) => {
   // Encontre o índice correto para a nova letra
@@ -279,7 +276,6 @@ const criarletra2 = (pipePosition) => {
   proximaLetra = (proximaLetra + 1) % letras.length;
 };
 
-
 const updateScore = () => {
   scoreDisplay.textContent = score;
 };
@@ -333,10 +329,10 @@ const loop = () => {
       // Reproduz o som do pulo desde o início e pausa ao final
       loser_sound.currentTime = 0; // Reinicia o som do início
       loser_sound.play();
-      
+
       setTimeout(() => {
-        loser_sound.pause(); 
-      }, 800); 
+        loser_sound.pause();
+      }, 800);
       speak(
         `Você tem ${lives} vida${lives === 1 ? "" : "s"} restante${
           lives === 1 ? "" : "s"
@@ -441,13 +437,13 @@ const verificarColisaoLetras = () => {
     ) {
       // Coletar a letra
       letraElemento.style.display = "none"; // Oculta a letra
-          // Reproduz o som do pulo desde o início e pausa ao final
-          collect_sound.currentTime = 0; // Reinicia o som do início
-          collect_sound.play();
+      // Reproduz o som do pulo desde o início e pausa ao final
+      collect_sound.currentTime = 0; // Reinicia o som do início
+      collect_sound.play();
 
-          setTimeout(() => {
-            collect_sound.pause(); 
-          }, 800); 
+      setTimeout(() => {
+        collect_sound.pause();
+      }, 800);
       letrasElementos.splice(index, 1); // Remove da lista
 
       // Mostra a letra coletada no topo
@@ -513,8 +509,8 @@ function jump() {
     jump_sound.play();
 
     setTimeout(() => {
-      jump_sound.pause(); 
-    }, 800); 
+      jump_sound.pause();
+    }, 800);
 
     setTimeout(() => {
       pinguim.classList.remove("jump");
@@ -565,8 +561,8 @@ if ("webkitSpeechRecognition" in window) {
     // Verifica se a última palavra dita foi a correta e fala a mensagem
     if (resultPara.textContent.includes(expectedWord)) {
       speak("Parabéns! Você passou de fase!");
-      window.location.href = 'http://127.0.0.1:5501/jogo.Autocomunic/capivara/capivara_fase4.htmll';
-
+      window.location.href =
+        "http://127.0.0.1:5501/jogo.Autocomunic/capivara/capivara_fase4.htmll";
     } else {
       speak("Tente novamente!");
       console.log("Palavra incorreta reconhecida.");
