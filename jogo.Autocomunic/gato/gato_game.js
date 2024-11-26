@@ -121,6 +121,7 @@ let ignoreCollision = false;
 let falou_reiniciar = false;
 
 const letras = ["G", "A", "T", "O"];
+letrasColetadas = ['G', 'A', 'T', 'O']
 let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
@@ -376,7 +377,57 @@ const loop = () => {
         "Clique no botão para reiniciar o reconhecimento de voz. Repita a palavra...gato"
       );
       falou_reiniciar = true;
+      
+      
     }
+    const confetti = [];
+    const colors = ["#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd"];
+
+    function ConfettiPiece() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height - canvas.height;
+      this.size = Math.random() * 10 + 5;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.speed = Math.random() * 3 + 1;
+      this.angle = Math.random() * 360;
+      this.rotationSpeed = Math.random() * 10 - 5;
+
+      this.update = function () {
+        this.y += this.speed;
+        this.angle += this.rotationSpeed;
+        if (this.y > canvas.height) {
+          this.y = -10;
+          this.x = Math.random() * canvas.width;
+        }
+      };
+
+      this.draw = function () {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.angle * Math.PI) / 180);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+        ctx.restore();
+      };
+    }
+
+    function createConfetti() {
+      for (let i = 0; i < 150; i++) {
+        confetti.push(new ConfettiPiece());
+      }
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach((confetto) => {
+        confetto.update();
+        confetto.draw();
+      });
+      requestAnimationFrame(animateConfetti);
+    }
+
+    createConfetti();
+    animateConfetti();
   }
 };
 

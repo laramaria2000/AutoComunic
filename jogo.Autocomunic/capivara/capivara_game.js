@@ -120,7 +120,7 @@ let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
 
-//letrasColetadas = ["C", "A", "P", "I", "V", "AA", "R", "AAA"];
+letrasColetadas = ["C", "A", "P", "I", "V", "AA", "R", "AAA"];
 const letras = ["C", "A", "P", "I", "V", "AA", "R", "AAA"];
 let proximaLetra = 0;
 
@@ -391,18 +391,16 @@ const verificarPalavracapivara = () => {
   return true;
 };
 
-// Função para criar uma letra no jogo
 const criarLetra = (pipePosition) => {
   const letra = letras[proximaLetra];
   const letraElemento = document.createElement("img");
   letraElemento.src = `img.capivara/letra${letra}.png`;
   letraElemento.alt = letra;
   letraElemento.classList.add("letra", "letra-animacao");
-  letraElemento.style.bottom = "200px"; // Ajuste conforme necessário para a posição acima do pedra
+  letraElemento.style.bottom = "200px"; 
 
-  // Centralizar a letra em relação ao pedra
   const pipeWidth = pipe.offsetWidth;
-  const letraWidth = 50; // Largura da imagem da letra
+  const letraWidth = 50; 
   letraElemento.style.right = `${
     window.innerWidth - pipePosition - pipeWidth / 2 + letraWidth / 2
   }px`;
@@ -413,7 +411,6 @@ const criarLetra = (pipePosition) => {
   proximaLetra = (proximaLetra + 1) % letras.length;
 };
 
-// Função para exibir as letras coletadas na tela
 const criarLetrasColetadas = () => {
   letrasColetadas.forEach((letra) => {
     const letraColetada = document.createElement("img");
@@ -435,10 +432,8 @@ const verificarColisaoLetras = () => {
       letraPosition.top < capivaraPosition.bottom &&
       letraPosition.bottom > capivaraPosition.top
     ) {
-      // Coletar a letra
-      letraElemento.style.display = "none"; // Oculta a letra
-      // Reproduz o som do pulo desde o início e pausa ao final
-      collect_sound.currentTime = 0; // Reinicia o som do início
+      letraElemento.style.display = "none"; 
+      collect_sound.currentTime = 0; 
       collect_sound.play();
 
       setTimeout(() => {
