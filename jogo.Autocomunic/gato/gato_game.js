@@ -121,7 +121,7 @@ let ignoreCollision = false;
 let falou_reiniciar = false;
 
 const letras = ["G", "A", "T", "O"];
-letrasColetadas = ['G', 'A', 'T', 'O']
+letrasColetadas = ['G', 'A', 'T', 'O'];
 let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
@@ -369,65 +369,15 @@ const loop = () => {
     clearInterval(gameInterval);
     vitoriaDisplay.style.display = "block";
     pipe.classList.remove("pipe-animation");
-
     gato.classList.remove("jump");
+    
     resetarGato();
     if (!falou_reiniciar) {
       speak(
         "Clique no botão para reiniciar o reconhecimento de voz. Repita a palavra...gato"
       );
       falou_reiniciar = true;
-      
-      
     }
-    const confetti = [];
-    const colors = ["#ff0a54", "#ff477e", "#ff7096", "#ff85a1", "#fbb1bd"];
-
-    function ConfettiPiece() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height - canvas.height;
-      this.size = Math.random() * 10 + 5;
-      this.color = colors[Math.floor(Math.random() * colors.length)];
-      this.speed = Math.random() * 3 + 1;
-      this.angle = Math.random() * 360;
-      this.rotationSpeed = Math.random() * 10 - 5;
-
-      this.update = function () {
-        this.y += this.speed;
-        this.angle += this.rotationSpeed;
-        if (this.y > canvas.height) {
-          this.y = -10;
-          this.x = Math.random() * canvas.width;
-        }
-      };
-
-      this.draw = function () {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate((this.angle * Math.PI) / 180);
-        ctx.fillStyle = this.color;
-        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
-        ctx.restore();
-      };
-    }
-
-    function createConfetti() {
-      for (let i = 0; i < 150; i++) {
-        confetti.push(new ConfettiPiece());
-      }
-    }
-
-    function animateConfetti() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      confetti.forEach((confetto) => {
-        confetto.update();
-        confetto.draw();
-      });
-      requestAnimationFrame(animateConfetti);
-    }
-
-    createConfetti();
-    animateConfetti();
   }
 };
 
@@ -446,11 +396,10 @@ const criarLetra = (pipePosition) => {
   letraElemento.src = `img/letra${letra}.png`;
   letraElemento.alt = letra;
   letraElemento.classList.add("letra", "letra-animacao");
-  letraElemento.style.bottom = "200px"; // Ajuste conforme necessário para a posição acima do lixeira
+  letraElemento.style.bottom = "200px"; 
 
-  // Centralizar a letra em relação ao lixeira
   const pipeWidth = pipe.offsetWidth;
-  const letraWidth = 50; // Largura da imagem da letra
+  const letraWidth = 50; 
   letraElemento.style.right = `${
     window.innerWidth - pipePosition - pipeWidth / 2 + letraWidth / 2
   }px`;
@@ -483,9 +432,8 @@ const verificarColisaoLetras = () => {
       letraPosition.bottom > gatoPosition.top
     ) {
       // Coletar a letra
-      letraElemento.style.display = "none"; // Oculta a letra
-      // Reproduz o som do pulo desde o início e pausa ao final
-      collect_sound.currentTime = 0; // Reinicia o som do início
+      letraElemento.style.display = "none"; 
+      collect_sound.currentTime = 0; 
       collect_sound.play();
 
       setTimeout(() => {
@@ -500,18 +448,17 @@ const verificarColisaoLetras = () => {
       letraColetada.classList.add("letra-coletada");
       letrasColetadasDisplay.appendChild(letraColetada);
 
-      letrasColetadas.push(letraElemento.alt); // Adiciona à lista de letras coletadas
+      letrasColetadas.push(letraElemento.alt); 
 
       score += 10;
       updateScore();
     } else if (letraPosition.right < 0) {
-      // Reposiciona a letra ao lado direito da tela
-      letraElemento.style.right = "-80px"; // Ajuste conforme necessário para reposicionar a letra
+      letraElemento.style.right = "-80px"; 
     }
   });
 };
 
-let lastClickTime = 0; // Para rastrear o tempo do último clique
+let lastClickTime = 0; 
 
 document.addEventListener("keypress", (e) => {
   const tecla = e.key;
@@ -531,7 +478,6 @@ document.addEventListener("touchstart", (e) => {
 document.addEventListener("dblclick", (e) => {
   const currentTime = new Date().getTime();
   if (currentTime - lastClickTime < 5) {
-    // Considera 300 ms como intervalo para duplo clique
     jump();
   }
   lastClickTime = currentTime;
