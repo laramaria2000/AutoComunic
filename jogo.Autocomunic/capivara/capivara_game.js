@@ -397,10 +397,10 @@ const criarLetra = (pipePosition) => {
   letraElemento.src = `img.capivara/letra${letra}.png`;
   letraElemento.alt = letra;
   letraElemento.classList.add("letra", "letra-animacao");
-  letraElemento.style.bottom = "200px"; 
+  letraElemento.style.bottom = "200px";
 
   const pipeWidth = pipe.offsetWidth;
-  const letraWidth = 50; 
+  const letraWidth = 50;
   letraElemento.style.right = `${
     window.innerWidth - pipePosition - pipeWidth / 2 + letraWidth / 2
   }px`;
@@ -432,8 +432,8 @@ const verificarColisaoLetras = () => {
       letraPosition.top < capivaraPosition.bottom &&
       letraPosition.bottom > capivaraPosition.top
     ) {
-      letraElemento.style.display = "none"; 
-      collect_sound.currentTime = 0; 
+      letraElemento.style.display = "none";
+      collect_sound.currentTime = 0;
       collect_sound.play();
 
       setTimeout(() => {
