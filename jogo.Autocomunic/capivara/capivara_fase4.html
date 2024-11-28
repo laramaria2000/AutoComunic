@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <link rel="stylesheet" href="capivara_game.css">
-  <title>Fase 2</title>
+  <title>Fase 4</title>
 
 </head>
 <body>
@@ -42,10 +42,15 @@
       <button id="pause-btn" class="round-button1">
         <img src="img.capivara/pause.png" alt="pause">
       </button>
-      <button class="round-button2">
+      <button onclick="goToincialpage()" class="round-button2">
         <img src="img.capivara/inicial.png" alt="inicial">
       </button>    
     </div>
+    <script>
+      function goToincialpage() {
+        window.location.href = "http://127.0.0.1:5501/Programa%C3%A7ao/inicial.html";
+      }
+    </script>
     <img class="capivara" src="img.capivara/capivara.gif" alt="capivara" style="height: 200px; width: 200px ;">
     <img class="pipe" src="img.capivara/caixa.png" alt="caixa" style="height: 100px; width: 100px;">
 
@@ -64,7 +69,7 @@
               <img src="img.capivara/pause.png" alt="Imagem" style="width: 40px; height: 40px;">
               Sim
             </button>
-            <button id="despause-btn2" class="button-custom2" href="" style="background-color: #f5b483; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
+            <button id="despause-btn2" class="button-custom2" onclick="goToCharactersPage()" style="background-color: #f5b483; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
               <img src="img.capivara/pausex.png" alt="Imagem" style="width: 40px; height: 40px;">
               Não
             </button>
@@ -72,6 +77,11 @@
         </div>
       </div>
     </div>
+    <script>
+      function goToCharactersPage() {
+        window.location.href = "http://127.0.0.1:5501/Programa%C3%A7ao/personagens.html#";
+      }
+    </script>
     
      
     

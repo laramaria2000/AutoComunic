@@ -41,10 +41,15 @@
       <button id="pause-btn" class="round-button1">
         <img src="img/pause.png" alt="pause">
       </button>
-      <button class="round-button2">
+      <button onclick="goToincialpage()" class="round-button2">
         <img src="img/inicial.png" alt="inicial">
       </button>    
     </div>
+  <script>
+    function goToincialpage() {
+      window.location.href = "http://127.0.0.1:5501/Programa%C3%A7ao/inicial.html";
+    }
+  </script>
     <img class="gato" src="img/gato.gif" alt="gato">
     <img class="pipe" src="img/lixeira.png" alt="lixeira">
 
@@ -63,7 +68,7 @@
               <img src="img/pause.png" alt="Imagem" style="width: 40px; height: 40px;">
               Sim
             </button>
-            <button id="despause-btn2" class="button-custom2" href="" style="background-color: #3e6792; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
+            <button id="despause-btn2" class="button-custom2" onclick="goToCharactersPage()"  style="background-color: #3e6792; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
               <img src="img/pausex.png" alt="Imagem" style="width: 40px; height: 40px;">
               Não
             </button>
@@ -71,7 +76,11 @@
         </div>
       </div>
     </div>
-    
+    <script>
+      function goToCharactersPage() {
+        window.location.href = "http://127.0.0.1:5501/Programa%C3%A7ao/personagens.html#";
+      }
+    </script>
      
     
 

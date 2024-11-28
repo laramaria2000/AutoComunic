@@ -40,10 +40,15 @@
       <button id="pause-btn" class="round-button1">
         <img src="img.pinguim/pause.png" alt="pause">
       </button>
-      <button class="round-button2">
+      <button class="round-button2" onclick="goToincialpage()">
         <img src="img.pinguim/inicial.png" alt="inicial">
       </button>    
     </div>
+    <script>
+      function goToincialpage() {
+        window.location.href = "http://127.0.0.1:5501/Programa%C3%A7ao/inicial.html";
+      }
+    </script>
     <img class="pinguim" src="img.pinguim/pinguim.gif" alt="pinguim">
     <img class="pipe" src="img.pinguim/gelo.png" alt="gelo">
 
@@ -62,7 +67,7 @@
               <img src="img.pinguim/pause.png" alt="Imagem" style="width: 40px; height: 40px;">
               Sim
             </button>
-            <button id="despause-btn2" class="button-custom2" href="" style="background-color: #71b7db; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
+            <button id="despause-btn2" class="button-custom2" onclick="goToCharactersPage()" style="background-color: #71b7db; border-radius: 10px; color: aliceblue; margin-top: 10px; margin-bottom: 20px; width: 100px; height: 50px;">
               <img src="img.pinguim/pausex.png" alt="Imagem" style="width: 40px; height: 40px;">
               Não
             </button>
@@ -70,7 +75,11 @@
         </div>
       </div>
     </div>
-    
+    <script>
+      function goToCharactersPage() {
+        window.location.href = "http://127.0.0.1:5501/Programa%C3%A7ao/personagens.html";
+      }
+    </script>
      
     
 
