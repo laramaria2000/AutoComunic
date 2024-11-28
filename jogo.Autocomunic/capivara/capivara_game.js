@@ -120,7 +120,7 @@ let letrasColetadas = [];
 let ignoreCollision = false;
 let falou_reiniciar = false;
 
-letrasColetadas = ["C", "A", "P", "I", "V", "AA", "R", "AAA"];
+//letrasColetadas = ["C", "A", "P", "I", "V", "AA", "R", "AAA"];
 const letras = ["C", "A", "P", "I", "V", "AA", "R", "AAA"];
 let proximaLetra = 0;
 

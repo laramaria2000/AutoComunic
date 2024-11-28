@@ -121,7 +121,7 @@ let ignoreCollision = false;
 let falou_reiniciar = false;
 
 const letras = ["G", "A", "T", "O"];
-letrasColetadas = ["G", "A", "T", "O"];
+//letrasColetadas = ["G", "A", "T", "O"];
 let proximaLetra = 0;
 
 startsong.addEventListener("click", () => music.play());
