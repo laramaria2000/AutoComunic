@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="panda_game.css">
   <title>Fase 2</title>
 
+  <script>
+    if (!(localStorage.getItem('nivel2') === 'true')) {
+      window.location.href = 'http://127.0.0.1:5501/Programa%C3%A7ao/personagens.html';
+    }
+  </script>
+
   <style>
     body {
       margin: 0;

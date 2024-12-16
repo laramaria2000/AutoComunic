@@ -611,6 +611,7 @@ if ("webkitSpeechRecognition" in window) {
     console.log();
     if (resultPara.textContent.includes(expectedWord)) {
       speak("Parabéns! Você passou de fase!");
+      localStorage.setItem("nivel2", "true");
       window.location.href =
         "http://127.0.0.1:5501/jogo.Autocomunic/panda/panda_fase2.html";
     } else {
